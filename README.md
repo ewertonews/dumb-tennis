@@ -12,6 +12,8 @@ Avaliaremos uma variedade de aspectos, como design da solução, SOLID e orienta
 
 ## Introdução:
  - A aplicação deve executar
+ - Realize um fork do projeto
+ - Adicione @pottencial (Pottencial Seguradora) como membro do seu fork. Você pode fazer isto em  https://gitlab.com/`your-user`/tech-test-tennis/settings/members
  - Quando você começar, faça um commit vazio com a mensagem "Iniciando o teste de tecnologia" e quando terminar, faça o commit com uma mensagem "Finalizado o teste de tecnologia".
  - Commit após cada ciclo de refatoração pelo menos.
  - Não use branches.
