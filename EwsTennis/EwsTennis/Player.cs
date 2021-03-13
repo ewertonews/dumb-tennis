@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EwsTennis.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace EwsTennis
 {
     public class Player
     {
-        
+        public EvenOrOddOption EvenOrOdd { get; set; }
     }
 }
