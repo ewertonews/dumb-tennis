@@ -21,7 +21,7 @@ namespace EwsTennis.Tests
         }
 
         [Test]
-        public void BuildWithNameShouldReturnUserWithGivenName()
+        public void BuildWithNameShouldReturnPlayerWithGivenName()
         {
             var playerName = "Raphael";
             var playerBuilder = new PlayerBuilder();
@@ -34,7 +34,7 @@ namespace EwsTennis.Tests
         }
 
         [Test]
-        public void BuildWithLevelShouldReturnUserWithGivenLevel()
+        public void BuildWithLevelShouldReturnPlayerWithGivenLevel()
         {
             var playerLevel = PlayerLevel.Beginner;
             var playerBuilder = new PlayerBuilder();
@@ -44,6 +44,19 @@ namespace EwsTennis.Tests
                 .Build();
 
             Assert.That(player.Level, Is.EqualTo(playerLevel));
+        }
+
+        [Test]
+        public void BuildAtPositionShouldReturnPlayerWithGivenPosition()
+        {
+            var playerPosition = 15;
+            var playerBuilder = new PlayerBuilder();
+
+            var player = playerBuilder
+                .AtPosition(playerPosition)
+                .Build();
+
+            Assert.That(player.Position, Is.EqualTo(playerPosition));
         }
 
     }
