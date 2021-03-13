@@ -16,5 +16,11 @@ namespace EwsTennis
         {
             return _player;
         }
+
+        public PlayerBuilder WithName(string playerName)
+        {
+            _player.Name = playerName;
+            return this;
+        }
     }
 }
