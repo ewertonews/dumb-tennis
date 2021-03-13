@@ -1,10 +1,8 @@
-using Moq;
 using NUnit.Framework;
-using System;
 
 namespace EwsTennis.Tests
 {
-    public class Tests
+    public class EvenOrOddUnitTests
     {
         private IEvenOrOdd evenOrOdd;
 
