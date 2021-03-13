@@ -43,8 +43,6 @@ namespace EwsTennis.Tests
             };
 
             //Act & Assert
-
-
             Assert.That(() => evenOrOdd.Draw(player1, player2),
                 Throws.Exception.TypeOf<InvalidEvenOddOptionException>());
 
