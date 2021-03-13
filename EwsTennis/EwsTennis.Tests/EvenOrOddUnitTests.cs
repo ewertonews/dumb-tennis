@@ -27,5 +27,26 @@ namespace EwsTennis.Tests
             //Assert
             Assert.That(winner.EvenOrOdd, Is.EqualTo(player2.EvenOrOdd));
         }
+
+        [Test]
+        public void DrawEvenOrOddShoudThrowInvalidEvenOddOptionExcepion()
+        {
+            //Arrange
+            var player1 = new Player()
+            {
+                EvenOrOdd = EvenOrOddOption.EVEN
+            };
+            var player2 = new Player()
+            {
+                EvenOrOdd = EvenOrOddOption.EVEN
+            };
+
+            //Act & Assert
+
+
+            Assert.That(() => evenOrOdd.Draw(player1, player2),
+                Throws.Exception.TypeOf<InvalidEvenOddOptionException>());
+
+        }
     }
 }
