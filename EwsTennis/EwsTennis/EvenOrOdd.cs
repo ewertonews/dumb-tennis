@@ -14,7 +14,7 @@ namespace EwsTennis
         {
             if (player1.EvenOrOdd == player2.EvenOrOdd)
             {
-                string mensagemErro = "Jogadores não pode ter mesma opção de par ou impar";
+                string mensagemErro = "Jogadores não podem ter mesma opção de par ou impar";
                 throw new InvalidEvenOddOptionException(mensagemErro);
             }
             var players = new List<Player>() { player1, player2 };
