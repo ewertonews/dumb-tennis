@@ -1,4 +1,5 @@
 using EwsTennis.Enums;
+using EwsTennis.Exceptions;
 using NUnit.Framework;
 
 namespace EwsTennis.Tests
