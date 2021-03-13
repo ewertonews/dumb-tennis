@@ -1,4 +1,5 @@
 ﻿using EwsTennis.Enums;
+using System;
 
 namespace EwsTennis
 {
@@ -9,6 +10,11 @@ namespace EwsTennis
         public PlayerBuilder()
         {
             _player = new Player();
+        }
+
+        public Player Build()
+        {
+            return _player;
         }
     }
 }
