@@ -31,6 +31,19 @@ namespace EwsTennis.Tests
             Assert.That(player.ReachOfRightHand, Is.EqualTo(14));
         }
 
+        [Test]
+        public void SetReachOfHandsShouldSetLeftToOneWhenPlayerIsAtTheLeftCornerOfCourt()
+        {
+            var player = new Player()
+            {
+                Level = PlayerLevel.Experienced,
+                Position = 3
+            };
 
+            player.SetReachOfHands();
+
+            Assert.That(player.ReachOfLeftHand, Is.EqualTo(1));
+            Assert.That(player.ReachOfRightHand, Is.EqualTo(7));
+        }
     }
 }
