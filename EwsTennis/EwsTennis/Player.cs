@@ -6,7 +6,7 @@ namespace EwsTennis
     public class Player
     {
         public string Name { get; set; }
-        public PlayerLevel Level { private get; set; }
+        public PlayerLevel Level { private get; set; } = PlayerLevel.Beginner;
         public int ReachOfLeftHand { get; private set; }
         public int ReachOfRightHand { get; private set; }
         public int Position { get; set; }
@@ -19,8 +19,8 @@ namespace EwsTennis
 
         public void SetReachOfHands()
         {
-            ReachOfLeftHand = 6;
-            ReachOfRightHand = 14;
+            ReachOfLeftHand = Position - (int)Level; ;
+            ReachOfRightHand = Position + (int)Level;
         }
     }
 }
