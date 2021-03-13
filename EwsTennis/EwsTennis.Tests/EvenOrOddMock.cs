@@ -11,8 +11,8 @@ namespace EwsTennis.Tests
             var players = new List<Player>() { player1, player2 };
             EvenOrOddOption result = EvenOrOddOption.ODD;
 
-            var fakeRandomNumber = 5;
-            if (fakeRandomNumber % 2 == 0)
+            var resultRandomNumberOneToTen = 5;
+            if (resultRandomNumberOneToTen % 2 == 0)
             {
                 result = EvenOrOddOption.EVEN;
             }
