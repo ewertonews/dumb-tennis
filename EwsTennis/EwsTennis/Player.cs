@@ -24,9 +24,14 @@ namespace EwsTennis
             {
                 resultLeft = 1;
             }
-
             ReachOfLeftHand = resultLeft;
-            ReachOfRightHand = Position + (int)Level;
+
+            var resultRight = Position + (int)Level;
+            if (resultRight > 27)
+            {
+                resultRight = 27;
+            }
+            ReachOfRightHand = resultRight;
         }
     }
 }
