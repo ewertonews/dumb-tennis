@@ -16,10 +16,10 @@ namespace EwsTennis.Tests
         {
             //Arrange
             var player1 = new Player() {
-                EvenOrOdd = EvenOrOddOption.EVEN
+                EvenOrOdd = EvenOrOddOption.Even
             };
             var player2 = new Player() {
-                EvenOrOdd = EvenOrOddOption.ODD
+                EvenOrOdd = EvenOrOddOption.Odd
             };
 
             //Act
@@ -35,11 +35,11 @@ namespace EwsTennis.Tests
             //Arrange
             var player1 = new Player()
             {
-                EvenOrOdd = EvenOrOddOption.EVEN
+                EvenOrOdd = EvenOrOddOption.Even
             };
             var player2 = new Player()
             {
-                EvenOrOdd = EvenOrOddOption.EVEN
+                EvenOrOdd = EvenOrOddOption.Even
             };
 
             //Act & Assert

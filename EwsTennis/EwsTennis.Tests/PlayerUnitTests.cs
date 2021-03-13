@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using EwsTennis.Enums;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,20 @@ namespace EwsTennis.Tests
 
             Assert.That(result, Is.GreaterThanOrEqualTo(1));
             Assert.That(result, Is.LessThanOrEqualTo(27));
+        }
+
+        [Test]
+        public void SetReachOfHandShouldReturnSevenNineOrElevenBasedOnLevel()
+        {
+            var player = new Player()
+            {
+                Level = PlayerLevel.Experienced,
+                Position = 10
+            };
+
+            var result = player.SetReachOfHands();
+
+            Assert.That(player.ReachOfHands, Is.EqualTo());
         }
     }
 }

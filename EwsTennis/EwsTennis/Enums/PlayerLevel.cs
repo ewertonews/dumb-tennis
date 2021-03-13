@@ -8,8 +8,8 @@ namespace EwsTennis.Enums
 {
     public enum PlayerLevel
     {
-        BEGINNER = 3,
-        EXPERIENCED,
-        EXPERT
+        Beginner = 3,
+        Experienced,
+        Expert
     }
 }

@@ -18,12 +18,12 @@ namespace EwsTennis
                 throw new InvalidEvenOddOptionException(mensagemErro);
             }
             var players = new List<Player>() { player1, player2 };
-            EvenOrOddOption result = EvenOrOddOption.ODD;
+            EvenOrOddOption result = EvenOrOddOption.Odd;
 
             var resultRandomNumberOneToTen = random.Next(1, 11);
             if (resultRandomNumberOneToTen % 2 == 0)
             {
-                result = EvenOrOddOption.EVEN;
+                result = EvenOrOddOption.Even;
             }
 
             return players.First(p => p.EvenOrOdd == result);
