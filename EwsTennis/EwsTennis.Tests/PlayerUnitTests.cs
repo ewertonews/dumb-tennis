@@ -1,10 +1,5 @@
 ﻿using EwsTennis.Enums;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EwsTennis.Tests
 {
@@ -30,9 +25,10 @@ namespace EwsTennis.Tests
                 Position = 10
             };
 
-            var result = player.SetReachOfHands();
+            player.SetReachOfHands();
 
-            Assert.That(player.ReachOfHands, Is.EqualTo());
+            Assert.That(player.ReachOfLeftHand, Is.EqualTo(6));
+            Assert.That(player.ReachOfRightHand, Is.EqualTo(14));
         }
     }
 }
