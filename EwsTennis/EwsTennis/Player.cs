@@ -6,7 +6,7 @@ namespace EwsTennis
     public class Player
     {
         public string Name { get; set; }
-        public PlayerLevel Level { private get; set; } = PlayerLevel.Beginner;
+        public PlayerLevel Level { get; set; } = PlayerLevel.Beginner;
         public int ReachOfLeftHand { get; private set; }
         public int ReachOfRightHand { get; private set; }
         public int Position { get; set; }

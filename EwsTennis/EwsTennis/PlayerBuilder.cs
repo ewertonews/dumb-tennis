@@ -22,5 +22,11 @@ namespace EwsTennis
             _player.Name = playerName;
             return this;
         }
+
+        public PlayerBuilder WithLevel(PlayerLevel playerLevel)
+        {
+            _player.Level = playerLevel;
+            return this;
+        }
     }
 }
