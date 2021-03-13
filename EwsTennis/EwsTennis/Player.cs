@@ -19,7 +19,13 @@ namespace EwsTennis
 
         public void SetReachOfHands()
         {
-            ReachOfLeftHand = Position - (int)Level; ;
+            var resultLeft = Position - (int)Level;
+            if (resultLeft <= 0)
+            {
+                resultLeft = 1;
+            }
+
+            ReachOfLeftHand = resultLeft;
             ReachOfRightHand = Position + (int)Level;
         }
     }
