@@ -1,4 +1,6 @@
 ﻿using EwsTennis.Enums;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace EwsTennis.Tests
 {
@@ -6,10 +8,16 @@ namespace EwsTennis.Tests
     {
         public Player Draw(Player player1, Player player2)
         {
-            return new Player()
+            var players = new List<Player>() { player1, player2 };
+            EvenOrOddOption result = EvenOrOddOption.ODD;
+
+            var fakeRandomNumber = 5;
+            if (fakeRandomNumber % 2 == 0)
             {
-                EvenOrOdd = EvenOrOddOption.ODD
-            };
+                result = EvenOrOddOption.EVEN;
+            }
+
+            return players.First(p => p.EvenOrOdd == result);
         }
     }
 }

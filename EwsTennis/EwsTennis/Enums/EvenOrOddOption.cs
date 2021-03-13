@@ -8,7 +8,7 @@ namespace EwsTennis.Enums
 {
     public enum EvenOrOddOption
     {
-       EVEN,
-       ODD
+       ODD = 1,
+       EVEN       
     }
 }
