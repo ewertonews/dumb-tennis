@@ -17,7 +17,7 @@ namespace EwsTennis.Tests
         }
 
         [Test]
-        public void SetReachOfHandShouldReturnSevenNineOrElevenBasedOnLevel()
+        public void SetReachOfHandShouldReturnSixForLeftAndFourteenForRight()
         {
             var player = new Player()
             {
@@ -30,5 +30,7 @@ namespace EwsTennis.Tests
             Assert.That(player.ReachOfLeftHand, Is.EqualTo(6));
             Assert.That(player.ReachOfRightHand, Is.EqualTo(14));
         }
+
+
     }
 }
