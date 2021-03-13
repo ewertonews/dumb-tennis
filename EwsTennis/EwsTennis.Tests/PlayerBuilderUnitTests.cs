@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using EwsTennis.Enums;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,19 @@ namespace EwsTennis.Tests
                 .Build();
 
             Assert.That(player.Name, Is.EqualTo(playerName));
+        }
+
+        [Test]
+        public void BuildWithLevelShouldReturnUserWithGivenLevel()
+        {
+            var playerLevel = PlayerLevel.Beginner;
+            var playerBuilder = new PlayerBuilder();
+
+            var player = playerBuilder
+                .WithLevel(playerLevel)
+                .Build();
+
+            Assert.That(player.Level, Is.EqualTo(playerLevel));
         }
 
     }
