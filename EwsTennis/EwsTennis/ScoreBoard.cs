@@ -16,8 +16,8 @@ namespace EwsTennis
 
         public List<int> ScoreList = new List<int>() { 0, 15, 30, 40 };
 
-        public int PlayerOneScore { private get; set; }
-        public int PlayerTwoScore { private get; set; }
+        public int PlayerOneScore;
+        public int PlayerTwoScore;
 
 
         public int GetPlayerOneScore()
