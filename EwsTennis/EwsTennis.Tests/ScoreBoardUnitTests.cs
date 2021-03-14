@@ -50,5 +50,18 @@ namespace EwsTennis.Tests
 
             Assert.That(scoreBoard.IsTie(), Is.True);
         }
+
+        [Test]
+        public void IsTieShouldReturnFalseWhenPlayersScoreAreNotTheSame()
+        {
+            var player1 = playerBuilder.Build();
+            player1.Score = 2;
+            playerBuilder = new PlayerBuilder();
+            var player2 = playerBuilder.Build();
+            player2.Score = 1;
+            var scoreBoard = new ScoreBoard(player1, player2);
+
+            Assert.That(scoreBoard.IsTie(), Is.Not.True);
+        }
     }
 }
