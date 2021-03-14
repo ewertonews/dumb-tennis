@@ -23,7 +23,8 @@ namespace EwsTennis
             {
                 Name = _player.Name,
                 Level = _player.Level,
-                Position = _player.Position                
+                Position = _player.Position,
+                EvenOrOdd = _player.EvenOrOdd
             };
             _player = new Player(_randomNumber);
             return player;
@@ -57,8 +58,13 @@ namespace EwsTennis
         }
 
         public PlayerBuilder WithEvenOrOddOption(string evenOrOdd)
-        {            
-            _player.Level = (PlayerLevel)Enum.Parse(typeof(EvenOrOddOption), evenOrOdd);
+        {
+            EvenOrOddOption optionEvenOdd;
+            if (!Enum.TryParse(evenOrOdd, true, out optionEvenOdd))
+            {
+                throw new InvalidEvenOddOptionException("A opção para o par ou impar deve ser 'even' para par ou 'odd' para ímpar");
+            }
+            _player.EvenOrOdd = optionEvenOdd;
             return this;
         }
     }

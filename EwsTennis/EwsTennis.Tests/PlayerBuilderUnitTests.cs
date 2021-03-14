@@ -94,8 +94,16 @@ namespace EwsTennis.Tests
                 .WithEvenOrOddOption(evenOrOdd)
                 .Build();
 
-            Assert.That(player.Level, Is.EqualTo(expectEnumOption));
-        }      
+            Assert.That(player.EvenOrOdd, Is.EqualTo(expectEnumOption));
+        }
+
+        [Test]
+        public void BuildWithEvenOrOddOptionShouldReturnPlayerWithCorrectEvenOddOption()
+        {
+            var playerBuilder = new PlayerBuilder(randomNumber);           
+
+            Assert.That(() => playerBuilder.WithEvenOrOddOption("impar"), Throws.TypeOf<InvalidEvenOddOptionException>());
+        }
 
     }
 }
