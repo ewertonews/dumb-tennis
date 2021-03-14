@@ -42,5 +42,10 @@ namespace EwsTennis
             }
             return scoreString;
         }
+
+        public void SetPlayerOneScore()
+        {
+            _player1.Score++;
+        }
     }
 }

@@ -66,7 +66,7 @@ namespace EwsTennis.Tests
         }        
 
         [Test]
-        public SetPlayer1ScoreShouldIncreadScoreOfPlayerByOne()
+        public void SetPlayer1ScoreShouldIncreadScoreOfPlayerByOne()
         {
             var player1 = playerBuilder
                .WithName("Ewerton")
@@ -79,6 +79,25 @@ namespace EwsTennis.Tests
             scoreBoard.SetPlayerOneScore();
 
             Assert.That(player1.Score, Is.EqualTo(1));
+            Assert.That(player2.Score, Is.EqualTo(0));
+
+        }
+
+        [Test]
+        public void SetPlayer2ScoreShouldIncreadScoreOfPlayerByOne()
+        {
+            var player1 = playerBuilder
+               .WithName("Ewerton")
+               .Build();
+            var player2 = playerBuilder
+               .WithName("Guga")
+               .Build();
+            var scoreBoard = new ScoreBoard(player1, player2);
+
+            scoreBoard.SetPlayerTwoScore();
+
+            Assert.That(player2.Score, Is.EqualTo(1));
+            Assert.That(player1.Score, Is.EqualTo(0));
         }
 
 
