@@ -1,10 +1,11 @@
-﻿using NUnit.Framework;
+﻿using EwsTennis.Contracts;
+using NUnit.Framework;
 
 namespace EwsTennis.Tests
 {
     public class ScoreBoardUnitTests
     {
-        private PlayerBuilder playerBuilder;
+        private IPlayerBuilder playerBuilder;
 
         [SetUp]
         public void Setup()
@@ -63,54 +64,6 @@ namespace EwsTennis.Tests
 
             Assert.That(result, Is.EqualTo(4));
         }        
-
-        [Test]
-        public void IsInTieBreakShouldReturnTrueWhenPlayersScoreAreBoth40()
-        {
-            var player1 = playerBuilder.Build();
-            player1.Score = 3;
-            var player2 = playerBuilder.Build();
-            player2.Score = 3;
-            var scoreBoard = new ScoreBoard(player1, player2);
-
-            Assert.That(scoreBoard.IsInTieBreak(), Is.True);
-        }
-
-        [Test]
-        public void IsInTieBreakShouldReturnTrueWhenPlayerOneScoredMoreThan3Points()
-        {
-            var player1 = playerBuilder.Build();
-            player1.Score = 3;
-            var player2 = playerBuilder.Build();
-            player2.Score = 4;
-            var scoreBoard = new ScoreBoard(player1, player2);
-
-            Assert.That(scoreBoard.IsInTieBreak(), Is.True);
-        }
-
-        [Test]
-        public void IsInTieBreakShouldReturnTrueWhenPlayerTwoScoredMoreThan3Points()
-        {
-            var player1 = playerBuilder.Build();
-            player1.Score = 4;
-            var player2 = playerBuilder.Build();
-            player2.Score = 3;
-            var scoreBoard = new ScoreBoard(player1, player2);
-
-            Assert.That(scoreBoard.IsInTieBreak(), Is.True);
-        }
-
-        [Test]
-        public void IsInTieBreakShouldReturnFalseWhenOneOfPlayersScoreIsLessThan40()
-        {
-            var player1 = playerBuilder.Build();
-            player1.Score = 3;
-            var player2 = playerBuilder.Build();
-            player2.Score = 2;
-            var scoreBoard = new ScoreBoard(player1, player2);
-
-            Assert.That(scoreBoard.IsInTieBreak(), Is.Not.True);
-        }
 
         [Test]
         public void ToStringShouldReturnScoreBoardInTVFormaForPlayer1Winning()

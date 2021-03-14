@@ -1,6 +1,6 @@
-﻿using EwsTennis.Enums;
+﻿using EwsTennis.Contracts;
+using EwsTennis.Enums;
 using EwsTennis.Exceptions;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,7 +14,7 @@ namespace EwsTennis
         {
             _randomNumber = randomNumber;
         }
-        
+
         public Player Draw(Player player1, Player player2)
         {
             if (player1.EvenOrOdd == player2.EvenOrOdd)

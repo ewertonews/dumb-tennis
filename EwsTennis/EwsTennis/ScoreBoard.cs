@@ -1,20 +1,20 @@
-﻿using System;
+﻿using EwsTennis.Contracts;
 using System.Collections.Generic;
 
 namespace EwsTennis
 {
-    public class ScoreBoard
+    public class ScoreBoard : IScoreBoard
     {
         private readonly Player _player1;
         private readonly Player _player2;
-        private List<int> ScoreList = new List<int>() { 0, 15, 30, 40 };
 
         public ScoreBoard(Player player1, Player player2)
         {
             _player1 = player1;
             _player2 = player2;
         }
-        
+        public List<int> ScoreList { get; } = new List<int>() { 0, 15, 30, 40 };
+
         public int GetPlayerOneScore()
         {
             if (_player1.Score >= 4)
@@ -31,19 +31,6 @@ namespace EwsTennis
                 return _player2.Score;
             }
             return ScoreList[_player2.Score];
-        }
-
-
-        //TODO: Move this methods to Referee class
-        private bool IsTie()
-        {
-            return _player1.Score == _player2.Score;
-        }
-
-        public bool IsInTieBreak()
-        {
-            return (GetPlayerOneScore() == 40 && IsTie()) 
-                || (!ScoreList.Contains(GetPlayerOneScore()) || (!ScoreList.Contains(GetPlayerTwoScore())));
         }
 
         public override string ToString()

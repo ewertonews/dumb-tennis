@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EwsTennis.Contracts;
+using System;
 
 namespace EwsTennis
 {

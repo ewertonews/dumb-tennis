@@ -1,6 +1,4 @@
-﻿using EwsTennis.Enums;
-
-namespace EwsTennis
+﻿namespace EwsTennis.Contracts
 {
     public interface IPlayerBuilder
     {
