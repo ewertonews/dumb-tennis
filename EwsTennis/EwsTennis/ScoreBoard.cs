@@ -47,5 +47,10 @@ namespace EwsTennis
         {
             _player1.Score++;
         }
+
+        public void SetPlayerTwoScore()
+        {
+            _player2.Score++;
+        }
     }
 }
