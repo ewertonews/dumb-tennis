@@ -1,12 +1,8 @@
-p1
 Ewerton
-beginner
-even
+Beginner
+Even
 20
-
-p2
 Guga
-beginner
-odd
+Beginner
+Odd
 25
-
