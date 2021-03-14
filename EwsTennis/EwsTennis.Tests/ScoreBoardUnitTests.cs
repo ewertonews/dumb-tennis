@@ -133,7 +133,6 @@ namespace EwsTennis.Tests
 
             string scoreBoardString = scoreBoard.ToString();
 
-
             Assert.That(scoreBoardString, Is.EqualTo(expectedScoreBoardString));
         }
 
