@@ -62,39 +62,39 @@ namespace EwsTennis.Tests
             var result = scoreBoard.GetPlayerTwoScore();
 
             Assert.That(result, Is.EqualTo(4));
-        }
-
-        [Test]
-        public void IsTieShouldReturnTrueWhenPlayersScoreAreTheSame()
-        {
-            var player1 = playerBuilder.Build();
-            player1.Score = 2;
-            playerBuilder = new PlayerBuilder();
-            var player2 = playerBuilder.Build();
-            player2.Score = 2;
-            var scoreBoard = new ScoreBoard(player1, player2);
-
-            Assert.That(scoreBoard.IsTie(), Is.True);
-        }
-
-        [Test]
-        public void IsTieShouldReturnFalseWhenPlayersScoreAreNotTheSame()
-        {
-            var player1 = playerBuilder.Build();
-            player1.Score = 2;
-            playerBuilder = new PlayerBuilder();
-            var player2 = playerBuilder.Build();
-            player2.Score = 1;
-            var scoreBoard = new ScoreBoard(player1, player2);
-
-            Assert.That(scoreBoard.IsTie(), Is.Not.True);
-        }
+        }        
 
         [Test]
         public void IsInTieBreakShouldReturnTrueWhenPlayersScoreAreBoth40()
         {
             var player1 = playerBuilder.Build();
             player1.Score = 3;
+            playerBuilder = new PlayerBuilder();
+            var player2 = playerBuilder.Build();
+            player2.Score = 3;
+            var scoreBoard = new ScoreBoard(player1, player2);
+
+            Assert.That(scoreBoard.IsInTieBreak(), Is.True);
+        }
+
+        [Test]
+        public void IsInTieBreakShouldReturnTrueWhenPlayerOneScoredMoreThan3Points()
+        {
+            var player1 = playerBuilder.Build();
+            player1.Score = 3;
+            playerBuilder = new PlayerBuilder();
+            var player2 = playerBuilder.Build();
+            player2.Score = 4;
+            var scoreBoard = new ScoreBoard(player1, player2);
+
+            Assert.That(scoreBoard.IsInTieBreak(), Is.True);
+        }
+
+        [Test]
+        public void IsInTieBreakShouldReturnTrueWhenPlayerTwoScoredMoreThan3Points()
+        {
+            var player1 = playerBuilder.Build();
+            player1.Score = 4;
             playerBuilder = new PlayerBuilder();
             var player2 = playerBuilder.Build();
             player2.Score = 3;

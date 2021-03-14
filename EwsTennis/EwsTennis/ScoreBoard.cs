@@ -33,14 +33,15 @@ namespace EwsTennis
             return ScoreList[_player2.Score];
         }
 
-        public bool IsTie()
+        private bool IsTie()
         {
             return _player1.Score == _player2.Score;
         }
 
         public bool IsInTieBreak()
         {
-            return (GetPlayerOneScore() == 40 || !ScoreList.Contains(GetPlayerOneScore())) && IsTie();
+            return (GetPlayerOneScore() == 40 && IsTie()) 
+                || (!ScoreList.Contains(GetPlayerOneScore()) || (!ScoreList.Contains(GetPlayerTwoScore())));
         }
     }
 }
