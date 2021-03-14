@@ -28,5 +28,11 @@ namespace EwsTennis
             _player.Level = playerLevel;
             return this;
         }
+
+        public PlayerBuilder AtPosition(int playerPosition)
+        {
+            _player.Position = playerPosition;
+            return this;
+        }
     }
 }
