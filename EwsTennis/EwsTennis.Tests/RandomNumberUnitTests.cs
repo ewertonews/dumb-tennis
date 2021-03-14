@@ -11,7 +11,7 @@ namespace EwsTennis.Tests
 
             var result = randomNumber.Get(1, 2);
 
-            Assert.That((result == 1 || result == 2), Is.True);
+            Assert.That(result == 1 || result == 2, Is.True);
         }
     }
 }
