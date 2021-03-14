@@ -7,6 +7,8 @@ namespace EwsTennis
     {
         private readonly Player _player1;
         private readonly Player _player2;
+        private readonly int PlayerOneScore;
+        private readonly int PlayerTwoScore;
 
         public ScoreBoard(Player player1, Player player2)
         {
@@ -16,8 +18,7 @@ namespace EwsTennis
 
         public List<int> ScoreList = new List<int>() { 0, 15, 30, 40 };
 
-        public int PlayerOneScore;
-        public int PlayerTwoScore;
+        
 
 
         public int GetPlayerOneScore()
@@ -29,6 +30,10 @@ namespace EwsTennis
         {
             return ScoreList[_player2.Score];
         }
-       
+
+        public bool IsTie()
+        {
+            return _player1.Score == _player2.Score;
+        }
     }
 }
