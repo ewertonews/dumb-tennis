@@ -45,5 +45,15 @@ namespace EwsTennis
             return (GetPlayerOneScore() == 40 && IsTie()) 
                 || (!ScoreList.Contains(GetPlayerOneScore()) || (!ScoreList.Contains(GetPlayerTwoScore())));
         }
+
+        public override string ToString()
+        {
+            var scoreString = $"{_player1.Name} {GetPlayerOneScore()} x {GetPlayerTwoScore()} {_player2.Name}";
+            if (GetPlayerTwoScore() > GetPlayerOneScore())
+            {
+                scoreString = $"{_player2.Name} {GetPlayerTwoScore()} x {GetPlayerOneScore()} {_player1.Name}";
+            }
+            return scoreString;
+        }
     }
 }

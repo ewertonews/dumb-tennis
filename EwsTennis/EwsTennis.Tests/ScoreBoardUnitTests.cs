@@ -117,7 +117,7 @@ namespace EwsTennis.Tests
         }
 
         [Test]
-        public void ToStringShouldReturnScoreBoardInTVFormat()
+        public void ToStringShouldReturnScoreBoardInTVFormaForPlayer1Winning()
         {
             var player1 = playerBuilder
                 .WithName("Ewerton")
@@ -130,6 +130,27 @@ namespace EwsTennis.Tests
             player2.Score = 2;
             var scoreBoard = new ScoreBoard(player1, player2);
             string expectedScoreBoardString = "Ewerton 40 x 30 Guga";
+
+            string scoreBoardString = scoreBoard.ToString();
+
+
+            Assert.That(scoreBoardString, Is.EqualTo(expectedScoreBoardString));
+        }
+
+        [Test]
+        public void ToStringShouldReturnScoreBoardInTVFormaForPlayer2Winning()
+        {
+            var player1 = playerBuilder
+                .WithName("Ewerton")
+                .Build();
+            player1.Score = 2;
+            playerBuilder = new PlayerBuilder();
+            var player2 = playerBuilder
+                .WithName("Guga")
+                .Build();
+            player2.Score = 3;
+            var scoreBoard = new ScoreBoard(player1, player2);
+            string expectedScoreBoardString = "Guga 40 x 30 Ewerton";
 
             string scoreBoardString = scoreBoard.ToString();
 
