@@ -80,7 +80,7 @@ namespace EwsTennis.Tests
         }
 
         [Test]
-        [TestCase("even", EvenOrOddOption.Even)]
+        [TestCase("Even", EvenOrOddOption.Even)]
         public void BuildWithEvenOrOddOptionShouldReturnPlayerWithCorrectEvenOddOption(string evenOrOdd, EvenOrOddOption expectEnumOption)
         {
             var playerBuilder = new PlayerBuilder(randomNumber);
