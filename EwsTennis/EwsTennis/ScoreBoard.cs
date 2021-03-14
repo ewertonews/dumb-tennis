@@ -1,4 +1,5 @@
 ﻿using EwsTennis.Contracts;
+using System;
 using System.Collections.Generic;
 
 namespace EwsTennis
@@ -13,6 +14,7 @@ namespace EwsTennis
             _player1 = player1;
             _player2 = player2;
         }
+
         public List<int> ScoreList { get; } = new List<int>() { 0, 15, 30, 40 };
 
         public int GetPlayerOneScore()
@@ -32,6 +34,27 @@ namespace EwsTennis
             }
             return ScoreList[_player2.Score];
         }
+        public void SetPlayerOneScore()
+        {
+            _player1.Score++;
+            OnPlayerScored();
+        }
+
+        public void SetPlayerTwoScore()
+        {
+            _player2.Score++;
+            OnPlayerScored();
+        }
+
+        public event EventHandler PlayerScored;
+
+        protected virtual void OnPlayerScored()
+        {
+            if (PlayerScored != null)
+            {
+                PlayerScored(this, EventArgs.Empty);
+            }
+        }
 
         public override string ToString()
         {
@@ -42,15 +65,6 @@ namespace EwsTennis
             }
             return scoreString;
         }
-
-        public void SetPlayerOneScore()
-        {
-            _player1.Score++;
-        }
-
-        public void SetPlayerTwoScore()
-        {
-            _player2.Score++;
-        }
+        
     }
 }

@@ -1,4 +1,5 @@
 ﻿using EwsTennis.Contracts;
+using System;
 using System.Collections.Generic;
 
 namespace EwsTennis
@@ -24,6 +25,11 @@ namespace EwsTennis
             List<int> scoreList = _scoreBoard.ScoreList;
             return (player1Score == 40 && IsTie())
                 || (!scoreList.Contains(_scoreBoard.GetPlayerOneScore()) || (!scoreList.Contains(player2Score)));
+        }
+
+        public void OnPlayerScored(object source, EventArgs eventArgs)
+        {
+            //TODO: Check winner
         }
     }
 }
