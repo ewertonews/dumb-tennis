@@ -57,8 +57,7 @@ namespace EwsTennis
         }
 
         public PlayerBuilder WithEvenOrOddOption(string evenOrOdd)
-        {
-            
+        {            
             _player.Level = (PlayerLevel)Enum.Parse(typeof(EvenOrOddOption), evenOrOdd);
             return this;
         }

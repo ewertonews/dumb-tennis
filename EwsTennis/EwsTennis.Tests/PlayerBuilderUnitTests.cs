@@ -81,6 +81,11 @@ namespace EwsTennis.Tests
 
         [Test]
         [TestCase("Even", EvenOrOddOption.Even)]
+        [TestCase("even", EvenOrOddOption.Even)]
+        [TestCase("EVEN", EvenOrOddOption.Even)]
+        [TestCase("Odd", EvenOrOddOption.Odd)]
+        [TestCase("odd", EvenOrOddOption.Odd)]
+        [TestCase("ODD", EvenOrOddOption.Odd)]
         public void BuildWithEvenOrOddOptionShouldReturnPlayerWithCorrectEvenOddOption(string evenOrOdd, EvenOrOddOption expectEnumOption)
         {
             var playerBuilder = new PlayerBuilder(randomNumber);
@@ -90,7 +95,7 @@ namespace EwsTennis.Tests
                 .Build();
 
             Assert.That(player.Level, Is.EqualTo(expectEnumOption));
-        }
+        }      
 
     }
 }
