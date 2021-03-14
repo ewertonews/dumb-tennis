@@ -26,6 +26,10 @@ namespace EwsTennis
 
         public int GetPlayerTwoScore()
         {
+            if (_player2.Score >= 4)
+            {
+                return _player2.Score;
+            }
             return ScoreList[_player2.Score];
         }
 
