@@ -69,7 +69,6 @@ namespace EwsTennis.Tests
         {
             var player1 = playerBuilder.Build();
             player1.Score = 3;
-            playerBuilder = new PlayerBuilder();
             var player2 = playerBuilder.Build();
             player2.Score = 3;
             var scoreBoard = new ScoreBoard(player1, player2);
@@ -82,7 +81,6 @@ namespace EwsTennis.Tests
         {
             var player1 = playerBuilder.Build();
             player1.Score = 3;
-            playerBuilder = new PlayerBuilder();
             var player2 = playerBuilder.Build();
             player2.Score = 4;
             var scoreBoard = new ScoreBoard(player1, player2);
@@ -95,7 +93,6 @@ namespace EwsTennis.Tests
         {
             var player1 = playerBuilder.Build();
             player1.Score = 4;
-            playerBuilder = new PlayerBuilder();
             var player2 = playerBuilder.Build();
             player2.Score = 3;
             var scoreBoard = new ScoreBoard(player1, player2);
@@ -108,7 +105,6 @@ namespace EwsTennis.Tests
         {
             var player1 = playerBuilder.Build();
             player1.Score = 3;
-            playerBuilder = new PlayerBuilder();
             var player2 = playerBuilder.Build();
             player2.Score = 2;
             var scoreBoard = new ScoreBoard(player1, player2);
@@ -123,7 +119,6 @@ namespace EwsTennis.Tests
                 .WithName("Ewerton")
                 .Build();
             player1.Score = 3;
-            playerBuilder = new PlayerBuilder();
             var player2 = playerBuilder
                 .WithName("Guga")
                 .Build();
@@ -143,7 +138,6 @@ namespace EwsTennis.Tests
                 .WithName("Ewerton")
                 .Build();
             player1.Score = 2;
-            playerBuilder = new PlayerBuilder();
             var player2 = playerBuilder
                 .WithName("Guga")
                 .Build();
@@ -152,7 +146,6 @@ namespace EwsTennis.Tests
             string expectedScoreBoardString = "Guga 40 x 30 Ewerton";
 
             string scoreBoardString = scoreBoard.ToString();
-
 
             Assert.That(scoreBoardString, Is.EqualTo(expectedScoreBoardString));
         }

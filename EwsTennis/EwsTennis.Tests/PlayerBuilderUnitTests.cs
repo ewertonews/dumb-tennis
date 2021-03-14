@@ -1,11 +1,6 @@
 ﻿using EwsTennis.Enums;
 using EwsTennis.Exceptions;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EwsTennis.Tests
 {
@@ -35,16 +30,27 @@ namespace EwsTennis.Tests
         }
 
         [Test]
-        public void BuildWithLevelShouldReturnPlayerWithGivenLevel()
+        [TestCase("Beginner")]
+        [TestCase("beginner")]
+        [TestCase("BEGINNER")]
+        public void BuildWithLevelShouldReturnPlayerWithGivenLevelIndependentlyOfCase(string level)
         {
-            var playerLevel = PlayerLevel.Beginner;
             var playerBuilder = new PlayerBuilder();
 
             var player = playerBuilder
-                .WithLevel(playerLevel)
+                .WithLevel(level)
                 .Build();
 
-            Assert.That(player.Level, Is.EqualTo(playerLevel));
+            Assert.That(player.Level, Is.EqualTo(PlayerLevel.Beginner));
+        }
+
+        [Test]
+        public void BuildWithLevelShouldThrowInvalidLevelException()
+        {
+            var level = "iniciante";
+            var playerBuilder = new PlayerBuilder();
+
+            Assert.That(() => playerBuilder.WithLevel(level), Throws.TypeOf<InvalidLevelException>());                
         }
 
         [Test]

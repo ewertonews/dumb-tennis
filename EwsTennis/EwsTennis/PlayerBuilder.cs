@@ -6,7 +6,7 @@ namespace EwsTennis
 {
     public class PlayerBuilder : IPlayerBuilder
     {
-        private readonly Player _player;
+        private Player _player;
 
         public PlayerBuilder()
         {
@@ -15,7 +15,14 @@ namespace EwsTennis
 
         public Player Build()
         {
-            return _player;
+            var player = new Player()
+            {
+                Name = _player.Name,
+                Level = _player.Level,
+                Position = _player.Position                
+            };
+            _player = new Player();
+            return player;
         }
 
         public PlayerBuilder WithName(string playerName)
@@ -24,9 +31,14 @@ namespace EwsTennis
             return this;
         }
 
-        public PlayerBuilder WithLevel(PlayerLevel playerLevel)
+        public PlayerBuilder WithLevel(string playerLevel)
         {
-            _player.Level = playerLevel;
+            PlayerLevel level;
+            if(!Enum.TryParse(playerLevel, true, out level))
+            {
+                throw new InvalidLevelException("O nível definido para o jogador é inválido.");
+            }
+            _player.Level = level;
             return this;
         }
 

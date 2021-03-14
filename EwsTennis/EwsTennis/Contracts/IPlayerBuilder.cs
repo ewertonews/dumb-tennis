@@ -6,7 +6,7 @@ namespace EwsTennis
     {
         PlayerBuilder AtPosition(int playerPosition);
         Player Build();
-        PlayerBuilder WithLevel(PlayerLevel playerLevel);
+        PlayerBuilder WithLevel(string playerLevel);
         PlayerBuilder WithName(string playerName);
     }
 }
