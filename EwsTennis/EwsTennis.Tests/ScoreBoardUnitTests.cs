@@ -66,6 +66,23 @@ namespace EwsTennis.Tests
         }        
 
         [Test]
+        public SetPlayer1ScoreShouldIncreadScoreOfPlayerByOne()
+        {
+            var player1 = playerBuilder
+               .WithName("Ewerton")
+               .Build();
+            var player2 = playerBuilder
+               .WithName("Guga")
+               .Build();
+            var scoreBoard = new ScoreBoard(player1, player2);
+
+            scoreBoard.SetPlayerOneScore();
+
+            Assert.That(player1.Score, Is.EqualTo(1));
+        }
+
+
+        [Test]
         public void ToStringShouldReturnScoreBoardInTVFormaForPlayer1Winning()
         {
             var player1 = playerBuilder

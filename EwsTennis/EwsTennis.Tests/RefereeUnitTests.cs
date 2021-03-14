@@ -59,6 +59,6 @@ namespace EwsTennis.Tests
             referee = new Referee(scoreBoard);
 
             Assert.That(referee.IsInTieBreak(), Is.Not.True);
-        }
+        }        
     }
 }
