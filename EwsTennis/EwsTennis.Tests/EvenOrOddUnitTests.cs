@@ -21,10 +21,10 @@ namespace EwsTennis.Tests
         public void DrawEvenOrOddShoudReturnCorrectWinnerPlayerForEven()
         {
             //Arrange
-            var player1 = new Player() {
+            var player1 = new Player(mockRandomNumber.Object) {
                 EvenOrOdd = EvenOrOddOption.Even
             };
-            var player2 = new Player() {
+            var player2 = new Player(mockRandomNumber.Object) {
                 EvenOrOdd = EvenOrOddOption.Odd
             };
             mockRandomNumber.Setup(mrn => mrn.Get(1, 10)).Returns(4);
@@ -40,11 +40,11 @@ namespace EwsTennis.Tests
         public void DrawEvenOrOddShoudReturnCorrectWinnerPlayerForOdd()
         {
             //Arrange
-            var player1 = new Player()
+            var player1 = new Player(mockRandomNumber.Object)
             {
                 EvenOrOdd = EvenOrOddOption.Even
             };
-            var player2 = new Player()
+            var player2 = new Player(mockRandomNumber.Object)
             {
                 EvenOrOdd = EvenOrOddOption.Odd
             };
@@ -61,11 +61,11 @@ namespace EwsTennis.Tests
         public void DrawEvenOrOddShoudThrowInvalidEvenOddOptionExcepion()
         {
             //Arrange
-            var player1 = new Player()
+            var player1 = new Player(mockRandomNumber.Object)
             {
                 EvenOrOdd = EvenOrOddOption.Even
             };
-            var player2 = new Player()
+            var player2 = new Player(mockRandomNumber.Object)
             {
                 EvenOrOdd = EvenOrOddOption.Even
             };
@@ -73,7 +73,6 @@ namespace EwsTennis.Tests
             //Act & Assert
             Assert.That(() => evenOrOdd.Draw(player1, player2),
                 Throws.Exception.TypeOf<InvalidEvenOddOptionException>());
-
         }
     }
 }

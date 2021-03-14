@@ -1,10 +1,18 @@
-﻿using EwsTennis.Enums;
+﻿using EwsTennis.Contracts;
+using EwsTennis.Enums;
 using System;
 
 namespace EwsTennis
 {
     public class Player
     {
+        private readonly IRandomNumber _randonNumber;
+
+        public Player(IRandomNumber randonNumber)
+        {
+            _randonNumber = randonNumber;
+        }
+
         public string Name { get; set; }
         public PlayerLevel Level { get; set; } = PlayerLevel.Beginner;
         public int ReachOfLeftHand { get; private set; }
@@ -16,7 +24,7 @@ namespace EwsTennis
 
         public int Serve()
         {
-            return new Random().Next(1, 28);
+            return _randonNumber.Get(1, 27);
         }
 
         public void SetReachOfHands()

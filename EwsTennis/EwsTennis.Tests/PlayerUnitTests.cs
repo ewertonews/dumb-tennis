@@ -1,14 +1,17 @@
-﻿using EwsTennis.Enums;
+﻿using EwsTennis.Contracts;
+using EwsTennis.Enums;
 using NUnit.Framework;
 
 namespace EwsTennis.Tests
 {
     public class PlayerUnitTests
     {
+        private readonly IRandomNumber randomNumber = new RandomNumber();
+
         [Test]
         public void ServeShouldReturnNumerFrom1To27()
         {
-            var player = new Player();
+            var player = new Player(randomNumber);
 
             var result = player.Serve();
 
@@ -19,7 +22,7 @@ namespace EwsTennis.Tests
         [Test]
         public void SetReachOfHandShouldReturn6ForLeftAnd14ForRight()
         {
-            var player = new Player()
+            var player = new Player(randomNumber)
             {
                 Level = PlayerLevel.Experienced,
                 Position = 10
@@ -34,7 +37,7 @@ namespace EwsTennis.Tests
         [Test]
         public void SetReachOfHandsShouldSetLeftToOneWhenPlayerIsAtTheLeftCornerOfCourt()
         {
-            var player = new Player()
+            var player = new Player(randomNumber)
             {
                 Level = PlayerLevel.Experienced,
                 Position = 3
@@ -49,7 +52,7 @@ namespace EwsTennis.Tests
         [Test]
         public void SetReachOfHandsShouldSetRightToTwentySevenWhenPlayerIsAtTheRightCornerOfCourt()
         {
-            var player = new Player()
+            var player = new Player(randomNumber)
             {
                 Level = PlayerLevel.Experienced,
                 Position = 25

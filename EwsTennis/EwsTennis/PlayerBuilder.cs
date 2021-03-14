@@ -8,21 +8,24 @@ namespace EwsTennis
     public class PlayerBuilder : IPlayerBuilder
     {
         private Player _player;
+        private readonly IRandomNumber _randomNumber;
 
-        public PlayerBuilder()
+        public PlayerBuilder(IRandomNumber randomNumber)
         {
-            _player = new Player();
+            _randomNumber = randomNumber;
+            _player = new Player(_randomNumber);
+
         }
 
         public Player Build()
         {
-            var player = new Player()
+            var player = new Player(_randomNumber)
             {
                 Name = _player.Name,
                 Level = _player.Level,
                 Position = _player.Position                
             };
-            _player = new Player();
+            _player = new Player(_randomNumber);
             return player;
         }
 

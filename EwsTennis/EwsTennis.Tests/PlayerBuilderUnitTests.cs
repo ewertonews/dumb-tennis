@@ -1,4 +1,5 @@
-﻿using EwsTennis.Enums;
+﻿using EwsTennis.Contracts;
+using EwsTennis.Enums;
 using EwsTennis.Exceptions;
 using NUnit.Framework;
 
@@ -6,10 +7,12 @@ namespace EwsTennis.Tests
 {
     public class PlayerBuilderUnitTests
     {
+        private IRandomNumber randomNumber = new RandomNumber();
+
         [Test]
         public void BuildShouldReturnPlayerInstance()
         {
-            var playerBuilder = new PlayerBuilder();
+            var playerBuilder = new PlayerBuilder(randomNumber);
 
             var player = playerBuilder.Build();
 
@@ -20,7 +23,7 @@ namespace EwsTennis.Tests
         public void BuildWithNameShouldReturnPlayerWithGivenName()
         {
             var playerName = "Raphael";
-            var playerBuilder = new PlayerBuilder();
+            var playerBuilder = new PlayerBuilder(randomNumber);
 
             var player = playerBuilder
                 .WithName(playerName)
@@ -35,7 +38,7 @@ namespace EwsTennis.Tests
         [TestCase("BEGINNER")]
         public void BuildWithLevelShouldReturnPlayerWithGivenLevelIndependentlyOfCase(string level)
         {
-            var playerBuilder = new PlayerBuilder();
+            var playerBuilder = new PlayerBuilder(randomNumber);
 
             var player = playerBuilder
                 .WithLevel(level)
@@ -48,7 +51,7 @@ namespace EwsTennis.Tests
         public void BuildWithLevelShouldThrowInvalidLevelException()
         {
             var level = "iniciante";
-            var playerBuilder = new PlayerBuilder();
+            var playerBuilder = new PlayerBuilder(randomNumber);
 
             Assert.That(() => playerBuilder.WithLevel(level), Throws.TypeOf<InvalidLevelException>());                
         }
@@ -57,7 +60,7 @@ namespace EwsTennis.Tests
         public void BuildAtPositionShouldReturnPlayerWithGivenPosition()
         {
             var playerPosition = 15;
-            var playerBuilder = new PlayerBuilder();
+            var playerBuilder = new PlayerBuilder(randomNumber);
 
             var player = playerBuilder
                 .AtPosition(playerPosition)
@@ -71,7 +74,7 @@ namespace EwsTennis.Tests
         [TestCase(28)]
         public void BuildAtPositionShoulThrowOutOfCourtBoundsException(int playerPosition)
         {
-            var playerBuilder = new PlayerBuilder();
+            var playerBuilder = new PlayerBuilder(randomNumber);
 
             Assert.That(() => playerBuilder.AtPosition(playerPosition), Throws.TypeOf<OutOfCourtBoundsException>());
         }

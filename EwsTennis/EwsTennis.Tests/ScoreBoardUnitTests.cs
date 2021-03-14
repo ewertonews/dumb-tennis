@@ -6,11 +6,13 @@ namespace EwsTennis.Tests
     public class ScoreBoardUnitTests
     {
         private IPlayerBuilder playerBuilder;
+        private IRandomNumber randomNumber;
 
         [SetUp]
         public void Setup()
         {
-            playerBuilder = new PlayerBuilder();
+            randomNumber = new RandomNumber();
+            playerBuilder = new PlayerBuilder(randomNumber);
         }
 
         [Test]

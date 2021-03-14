@@ -5,9 +5,17 @@ namespace EwsTennis.Tests
 {
     public class RefereeUnitTests
     {
-        private readonly IPlayerBuilder playerBuilder = new PlayerBuilder();
+        private IRandomNumber randomNumber;
+        private IPlayerBuilder playerBuilder;
         private IScoreBoard scoreBoard;
         private IReferee referee;
+
+        [SetUp]
+        public void SetUp()
+        {
+            randomNumber = new RandomNumber();
+            playerBuilder = new PlayerBuilder(randomNumber);
+        }
 
         [Test]
         public void IsInTieBreakShouldReturnTrueWhenPlayersScoreAreBoth40()
@@ -59,6 +67,7 @@ namespace EwsTennis.Tests
             referee = new Referee(scoreBoard);
 
             Assert.That(referee.IsInTieBreak(), Is.Not.True);
-        }        
+        }
+
     }
 }
