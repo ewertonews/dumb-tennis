@@ -6,7 +6,7 @@ namespace EwsTennis.Tests
     public class PlayerUnitTests
     {
         [Test]
-        public void ServeShouldReturnNumerFromOneToTwentySeven()
+        public void ServeShouldReturnNumerFrom1To27()
         {
             var player = new Player();
 
@@ -17,7 +17,7 @@ namespace EwsTennis.Tests
         }
 
         [Test]
-        public void SetReachOfHandShouldReturnSixForLeftAndFourteenForRight()
+        public void SetReachOfHandShouldReturn6ForLeftAnd14ForRight()
         {
             var player = new Player()
             {
