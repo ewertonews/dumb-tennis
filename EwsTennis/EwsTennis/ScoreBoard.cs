@@ -7,20 +7,14 @@ namespace EwsTennis
     {
         private readonly Player _player1;
         private readonly Player _player2;
-        private readonly int PlayerOneScore;
-        private readonly int PlayerTwoScore;
+        private List<int> ScoreList = new List<int>() { 0, 15, 30, 40 };
 
         public ScoreBoard(Player player1, Player player2)
         {
             _player1 = player1;
             _player2 = player2;
         }
-
-        public List<int> ScoreList = new List<int>() { 0, 15, 30, 40 };
-
         
-
-
         public int GetPlayerOneScore()
         {
             return ScoreList[_player1.Score];
