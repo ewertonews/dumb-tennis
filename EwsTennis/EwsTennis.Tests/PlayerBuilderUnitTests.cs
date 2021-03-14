@@ -79,5 +79,18 @@ namespace EwsTennis.Tests
             Assert.That(() => playerBuilder.AtPosition(playerPosition), Throws.TypeOf<OutOfCourtBoundsException>());
         }
 
+        [Test]
+        [TestCase("even", EvenOrOddOption.Even)]
+        public void BuildWithEvenOrOddOptionShouldReturnPlayerWithCorrectEvenOddOption(string evenOrOdd, EvenOrOddOption expectEnumOption)
+        {
+            var playerBuilder = new PlayerBuilder(randomNumber);
+
+            var player = playerBuilder
+                .WithEvenOrOddOption(evenOrOdd)
+                .Build();
+
+            Assert.That(player.Level, Is.EqualTo(expectEnumOption));
+        }
+
     }
 }
