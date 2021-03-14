@@ -17,6 +17,10 @@ namespace EwsTennis
         
         public int GetPlayerOneScore()
         {
+            if (_player1.Score >= 4)
+            {
+                return _player1.Score;
+            }
             return ScoreList[_player1.Score];
         }
 
@@ -32,7 +36,7 @@ namespace EwsTennis
 
         public bool IsInTieBreak()
         {
-            return GetPlayerOneScore() >= 40 && IsTie();
+            return (GetPlayerOneScore() == 40 || !ScoreList.Contains(GetPlayerOneScore())) && IsTie();
         }
     }
 }
