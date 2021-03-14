@@ -8,8 +8,13 @@ namespace EwsTennis
 {
     public class EvenOrOdd : IEvenOrOdd
     {
-        private readonly Random random = new Random();
+        private readonly IRandomNumber _randomNumber;
 
+        public EvenOrOdd(IRandomNumber randomNumber)
+        {
+            _randomNumber = randomNumber;
+        }
+        
         public Player Draw(Player player1, Player player2)
         {
             if (player1.EvenOrOdd == player2.EvenOrOdd)
@@ -20,7 +25,7 @@ namespace EwsTennis
             var players = new List<Player>() { player1, player2 };
             EvenOrOddOption result = EvenOrOddOption.Odd;
 
-            var resultRandomNumberOneToTen = random.Next(1, 11);
+            var resultRandomNumberOneToTen = _randomNumber.Get(1, 10);
             if (resultRandomNumberOneToTen % 2 == 0)
             {
                 result = EvenOrOddOption.Even;
