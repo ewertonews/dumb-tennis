@@ -14,5 +14,16 @@ namespace EwsTennis.Tests
 
             Assert.That(result, Is.EqualTo(15));
         }
+
+        [Test]
+        public void GetPlayerTwoScoreShouldReturnCorrectTennisScore()
+        {
+            var scoreBoard = new ScoreBoard();
+            scoreBoard.PlayerTwoScore = 2;
+
+            var result = scoreBoard.GetPlayerTwoScore();
+
+            Assert.That(result, Is.EqualTo(30));
+        }
     }
 }
