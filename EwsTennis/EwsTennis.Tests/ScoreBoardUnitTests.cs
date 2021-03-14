@@ -76,5 +76,18 @@ namespace EwsTennis.Tests
 
             Assert.That(scoreBoard.IsInTieBreak(), Is.True);
         }
+
+        [Test]
+        public void IsInTieBreakShouldReturnFalseWhenOneOfPlayersScoreIsLessThan40()
+        {
+            var player1 = playerBuilder.Build();
+            player1.Score = 3;
+            playerBuilder = new PlayerBuilder();
+            var player2 = playerBuilder.Build();
+            player2.Score = 2;
+            var scoreBoard = new ScoreBoard(player1, player2);
+
+            Assert.That(scoreBoard.IsInTieBreak(), Is.Not.True);
+        }
     }
 }

@@ -29,5 +29,10 @@ namespace EwsTennis
         {
             return _player1.Score == _player2.Score;
         }
+
+        public bool IsInTieBreak()
+        {
+            return GetPlayerOneScore() >= 40 && IsTie();
+        }
     }
 }
