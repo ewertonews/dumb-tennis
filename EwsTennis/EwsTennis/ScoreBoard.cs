@@ -14,5 +14,10 @@ namespace EwsTennis
         {
             return ScoreList[PlayerOneScore];
         }
+
+        public int GetPlayerTwoScore()
+        {
+            return ScoreList[PlayerTwoScore];
+        }
     }
 }
