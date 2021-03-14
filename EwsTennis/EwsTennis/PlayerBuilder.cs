@@ -1,4 +1,5 @@
 ﻿using EwsTennis.Enums;
+using EwsTennis.Exceptions;
 using System;
 
 namespace EwsTennis
@@ -31,6 +32,10 @@ namespace EwsTennis
 
         public PlayerBuilder AtPosition(int playerPosition)
         {
+            if (playerPosition < 0 || playerPosition > 27)
+            {
+                throw new OutOfCourtBoundsException("A posição do jogador precisa ser entre 1 e 27");
+            }
             _player.Position = playerPosition;
             return this;
         }

@@ -1,4 +1,5 @@
 ﻿using EwsTennis.Enums;
+using EwsTennis.Exceptions;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
