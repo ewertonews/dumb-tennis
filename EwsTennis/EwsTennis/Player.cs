@@ -11,6 +11,8 @@ namespace EwsTennis
         public int ReachOfRightHand { get; private set; }
         public int Position { get; set; }
         public EvenOrOddOption EvenOrOdd { get; set; }
+        public int Score { get; set; }
+
 
         public int Serve()
         {

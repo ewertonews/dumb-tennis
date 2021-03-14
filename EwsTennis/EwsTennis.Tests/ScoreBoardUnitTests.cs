@@ -4,10 +4,15 @@ namespace EwsTennis.Tests
 {
     public class ScoreBoardUnitTests
     {
+        private readonly PlayerBuilder playerBuilder = new PlayerBuilder();
+
         [Test]
         public void GetPlayerOneScoreShouldReturnCorrectTennisScore()
         {
-            var scoreBoard = new ScoreBoard();
+            var player1 = playerBuilder.Build();
+            player1.Score = 1;
+            var player2 = playerBuilder.Build();
+            var scoreBoard = new ScoreBoard(player1, player2);
             scoreBoard.PlayerOneScore = 1;
 
             var result = scoreBoard.GetPlayerOneScore();
@@ -18,12 +23,16 @@ namespace EwsTennis.Tests
         [Test]
         public void GetPlayerTwoScoreShouldReturnCorrectTennisScore()
         {
-            var scoreBoard = new ScoreBoard();
+            var player1 = playerBuilder.Build();
+            var player2 = playerBuilder.Build();
+            player2.Score = 2;
+
+            var scoreBoard = new ScoreBoard(player1, player2);
             scoreBoard.PlayerTwoScore = 2;
 
             var result = scoreBoard.GetPlayerTwoScore();
 
             Assert.That(result, Is.EqualTo(30));
-        }
+        }        
     }
 }
