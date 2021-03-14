@@ -59,5 +59,15 @@ namespace EwsTennis.Tests
             Assert.That(player.Position, Is.EqualTo(playerPosition));
         }
 
+        [Test]
+        [TestCase(-1)]
+        [TestCase(28)]
+        public void BuildAtPositionShoulThrowOutOfCourtBoundsException(int playerPosition)
+        {
+            var playerBuilder = new PlayerBuilder();
+
+            Assert.That(() => playerBuilder.AtPosition(playerPosition), Throws.TypeOf<OutOfCourtBoundsException>());
+        }
+
     }
 }
