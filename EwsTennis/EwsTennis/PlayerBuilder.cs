@@ -4,7 +4,7 @@ using System;
 
 namespace EwsTennis
 {
-    public class PlayerBuilder
+    public class PlayerBuilder : IPlayerBuilder
     {
         private readonly Player _player;
 
