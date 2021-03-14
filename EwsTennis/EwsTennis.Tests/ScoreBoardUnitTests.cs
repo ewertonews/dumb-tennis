@@ -26,6 +26,19 @@ namespace EwsTennis.Tests
         }
 
         [Test]
+        public void GetPlayerOneScoreShouldReturnNormalIntegerScore()
+        {
+            var player1 = playerBuilder.Build();
+            player1.Score = 4;
+            var player2 = playerBuilder.Build();
+            var scoreBoard = new ScoreBoard(player1, player2);
+
+            var result = scoreBoard.GetPlayerOneScore();
+
+            Assert.That(result, Is.EqualTo(4));
+        }
+
+        [Test]
         public void GetPlayerTwoScoreShouldReturnCorrectTennisScore()
         {
             var player1 = playerBuilder.Build();
@@ -89,5 +102,6 @@ namespace EwsTennis.Tests
 
             Assert.That(scoreBoard.IsInTieBreak(), Is.Not.True);
         }
+
     }
 }
