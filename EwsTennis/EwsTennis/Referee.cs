@@ -70,6 +70,11 @@ namespace EwsTennis
             return playerInAdvantage;
         }
 
+        public bool IsDeuce()
+        {
+            return tieBreakSet && isDeuce;
+        }
+
         private void SetAdvantage()
         {
             int player1ScoreDifference = _scoreBoard.Player1.Score - _scoreBoard.Player2.Score;
@@ -78,10 +83,14 @@ namespace EwsTennis
             if (tieBreakSet && (player1ScoreDifference == 1 || player2ScoreDifference == 1))
             {
                 playerInAdvantage = true;
+                isDeuce = false;
             }
             else
             {
                 playerInAdvantage = false;
+                int IndexOfLastScoreInTennisScoreList = 3;
+                isDeuce = _scoreBoard.Player1.Score != IndexOfLastScoreInTennisScoreList 
+                    && _scoreBoard.Player2.Score != IndexOfLastScoreInTennisScoreList;
             }
         }        
 

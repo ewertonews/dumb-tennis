@@ -169,17 +169,25 @@ namespace EwsTennis
                 WriteLine("~~~~~~~~~~~~~~~~~~~~ ");
                 WriteLine(_scoreBoard.ToString());
                 WriteLine("~~~~~~~~~~~~~~~~~~~~ ");
-                if (_referee.IsInTieBreak() && !PrintedTieBreakMessage)
-                {
-                    WriteLine("~~~~~~~~~~~~~~~~~~~~ ");
-                    WriteLine("TIE BREAK STARTED!");
-                    WriteLine("~~~~~~~~~~~~~~~~~~~~ ");
-                    PrintedTieBreakMessage = true;
-                }
-                if (_referee.IsAdvantage())
-                {
-                    WriteLine($"{atackingPlayer.Name} IN ADVANTAGE!");
-                }
+                PrintGameStatus(atackingPlayer);
+            }
+        }
+
+        private void PrintGameStatus(Player atackingPlayer)
+        {
+            if (_referee.IsInTieBreak() && !PrintedTieBreakMessage)
+            {
+                WriteLine("TIE BREAK STARTED!");
+                WriteLine("~~~~~~~~~~~~~~~~~~~~ ");
+                PrintedTieBreakMessage = true;
+            }
+            if (_referee.IsAdvantage())
+            {
+                WriteLine($"{atackingPlayer.Name} IN ADVANTAGE!");
+            }
+            if (_referee.IsDeuce())
+            {
+                WriteLine("~~~ DEUCE! ~~~");
             }
         }
 

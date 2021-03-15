@@ -214,7 +214,40 @@ namespace EwsTennis.Tests
             scoreBoard.SetPlayerTwoScore();
 
             Assert.That(referee.IsDeuce(), Is.True);
+        }
 
+        [Test]
+        public void IsDeuceShouldReturnTrueWhenPlayer2TiesDuringTieBreak()
+        {
+            var player1 = playerBuilder.Build();
+            player1.Score = 2;
+            var player2 = playerBuilder.Build();
+            player2.Score = 3;
+            scoreBoard = new ScoreBoard(player1, player2);
+            referee = new Referee(scoreBoard);
+
+            scoreBoard.PlayerScored += referee.OnPlayerScored;
+            scoreBoard.SetPlayerOneScore();
+            scoreBoard.SetPlayerTwoScore();
+            scoreBoard.SetPlayerOneScore();
+
+            Assert.That(referee.IsDeuce(), Is.True);
+        }
+
+        [Test]
+        public void IsDeuceShouldReturnFalseWhenPlayesTieWhileNotInTieBreak()
+        {
+            var player1 = playerBuilder.Build();
+            player1.Score = 1;
+            var player2 = playerBuilder.Build();
+            player2.Score = 2;
+            scoreBoard = new ScoreBoard(player1, player2);
+            referee = new Referee(scoreBoard);
+
+            scoreBoard.PlayerScored += referee.OnPlayerScored;
+            scoreBoard.SetPlayerOneScore();
+
+            Assert.That(referee.IsDeuce(), Is.False);
         }
 
     }

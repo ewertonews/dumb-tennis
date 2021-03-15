@@ -8,5 +8,6 @@ namespace EwsTennis.Contracts
         bool GameEnded { get; }
         void OnPlayerScored(object source, EventArgs eventArgs);
         bool IsAdvantage();
+        bool IsDeuce();
     }
 }
