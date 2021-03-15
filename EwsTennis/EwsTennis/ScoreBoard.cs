@@ -1,21 +1,27 @@
 ﻿using EwsTennis.Contracts;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace EwsTennis
 {
     public class ScoreBoard : IScoreBoard
     {
-        private readonly Player _player1;
-        private readonly Player _player2;
+        private IPlayer _player1;
+        private IPlayer _player2;
 
-        public ScoreBoard(Player player1, Player player2)
+        public ScoreBoard(IPlayer player1, IPlayer player2)
         {
             _player1 = player1;
             _player2 = player2;
+             
         }
 
-        public List<int> ScoreList { get; } = new List<int>() { 0, 15, 30, 40 };
+        public Player Player1 { get => (Player)_player1;  set => _player1 = value; }
+        public Player Player2 { get => (Player)_player2;   set => _player2 = value; }
+
+
+        public List<int> ScoreList { get; set; } = new List<int>() { 0, 15, 30, 40 };
 
         public int GetPlayerOneScore()
         {
@@ -65,6 +71,6 @@ namespace EwsTennis
             }
             return scoreString;
         }
-        
+
     }
 }

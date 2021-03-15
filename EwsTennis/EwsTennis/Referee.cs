@@ -1,12 +1,15 @@
 ﻿using EwsTennis.Contracts;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace EwsTennis
 {
     public class Referee : IReferee
     {
         private readonly IScoreBoard _scoreBoard;
+        public bool GameEnded { get; private set; } = false;
+        public Player Winner { get; private set; }
 
         public Referee(IScoreBoard scoreBoard)
         {
@@ -29,7 +32,26 @@ namespace EwsTennis
 
         public void OnPlayerScored(object source, EventArgs eventArgs)
         {
-            //TODO: Check winner
+            if (IsTie() && _scoreBoard.Player1.Score > 3)
+            {
+                _scoreBoard.ScoreList = Enumerable.Range(1, 100).ToList();
+                _scoreBoard.Player1.Score = 0;
+                _scoreBoard.Player2.Score = 0;
+            }
+
+            CheckWinner();
+        }
+
+        private void CheckWinner()
+        {
+            var scorePlayer1 = _scoreBoard.Player1.Score;
+            var scorePlayer2 = _scoreBoard.Player2.Score;
+
+            if (scorePlayer1 >= 3 && scorePlayer1 - scorePlayer2 >= 2 
+                || scorePlayer2 >= 3 && scorePlayer2 - scorePlayer1 >= 2)
+            {
+                GameEnded = true;
+            }            
         }
     }
 }

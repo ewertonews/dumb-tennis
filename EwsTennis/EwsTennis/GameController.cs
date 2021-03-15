@@ -1,23 +1,40 @@
 ﻿using EwsTennis.Contracts;
 using System;
+using static System.Console;
 using System.Collections.Generic;
+using System.Threading;
+using System.Linq;
 
 namespace EwsTennis
 {
-    public class GameController
+    public class GameController : IGameController
     {
         private readonly IPlayerBuilder _playerBuilder;
         private readonly IPlayersDataReader _playersDataReader;
+        private readonly IEvenOrOdd _evenOrOdd;
+        private readonly IScoreBoard _scoreBoard;
+        private readonly IReferee _referee;
+
+        public bool FirstServe { get; set; } = true;
+        public bool PrintedTieBreakMessage { get; set; } = false;
+        public List<Player> Players { get; } = new List<Player>();
+        public Player Player1 => Players[0];
+        public Player Player2 => Players[1];
 
         public GameController(
             IPlayerBuilder playerBuilder,
-            IPlayersDataReader playersDataReader)
+            IPlayersDataReader playersDataReader,
+            IEvenOrOdd evenOrOdd,
+            IScoreBoard scoreBoard, 
+            IReferee referee)
         {
             _playerBuilder = playerBuilder;
             _playersDataReader = playersDataReader;
+            _evenOrOdd = evenOrOdd;
+            _scoreBoard = scoreBoard;
+            _referee = referee;
+            scoreBoard.PlayerScored += referee.OnPlayerScored;
         }
-
-        public List<Player> Players { get; } = new List<Player>();
 
         public void InitializePlayers(string[] programArgs)
         {
@@ -44,8 +61,145 @@ namespace EwsTennis
                 .AtPosition(Convert.ToInt16(player2Data[3]))
                 .Build();
 
+            _scoreBoard.Player1 = player1;
+            _scoreBoard.Player2 = player2;
+
             Players.Add(player1);
             Players.Add(player2);
+        }
+
+        public void Round()
+        {
+            int indexOfAtackingPlayer = -1;
+            int indexOfDefendingPlayer = -1;
+            string playerAction = string.Empty;
+            Player atackingPlayer;
+            if (FirstServe)
+            {
+                indexOfAtackingPlayer = StartGameAndReturnIndexOfAtackinPlayer();
+                atackingPlayer = Players[indexOfAtackingPlayer];
+
+                DefineStarterIndexOfPlayers(
+                    atackingPlayer,
+                    out indexOfAtackingPlayer,
+                    out indexOfDefendingPlayer);
+
+                playerAction = "served";
+                FirstServe = false;
+            }
+
+            while (!_referee.GameEnded)
+            {
+                atackingPlayer = Players[indexOfAtackingPlayer];
+                Player defendingPlayer = Players[indexOfDefendingPlayer];
+
+                var atackingPlayerServe = atackingPlayer.Serve();
+                if(playerAction == "served")
+                {
+                    WriteLine($"{Players[indexOfAtackingPlayer].Name} {playerAction}!");
+                }
+
+                WriteLine($"Type the position {defendingPlayer.Name} should run to (1 to 27):");
+                var positionOfDefenfingPlayer = Convert.ToInt32(ReadLine());
+                defendingPlayer.Position = positionOfDefenfingPlayer;
+
+                if (IsSuccessfulDefense(defendingPlayer, atackingPlayerServe))
+                {
+                    playerAction = "hit back!";
+                    WriteLine($"{defendingPlayer.Name} {playerAction}!");
+                    SwapIndexesOfPlayers(ref indexOfAtackingPlayer, ref indexOfDefendingPlayer);
+                }
+                else
+                {
+                    WriteLine($"The ball went to position {atackingPlayerServe} at the court!");
+                    SetPlayerScore(atackingPlayer);
+                    PrintScore(atackingPlayer);
+                    playerAction = "served";
+                }
+            }            
+        }
+
+        private void SetPlayerScore(Player atackingPlayer)
+        {
+            if (atackingPlayer.Equals(Player1))
+            {
+                _scoreBoard.SetPlayerOneScore();
+            }
+            else
+            {
+                _scoreBoard.SetPlayerTwoScore();
+            }
+        }
+
+        private void PrintScore(Player atackingPlayer)
+        {
+            WriteLine($"{atackingPlayer.Name} scored!");
+            WriteLine(@"\o/\o/\o/\o/\o/\o/");
+            if (_referee.GameEnded)
+            {
+                WriteLine($"================ {atackingPlayer.Name.ToUpper()} IS THE WINNER!! ================");
+            }
+            else
+            {
+                WriteLine("~~~~~~~~~~~~~~~~~~~~ ");
+                WriteLine(_scoreBoard.ToString());
+                WriteLine("~~~~~~~~~~~~~~~~~~~~ ");
+                if (_referee.IsInTieBreak() && !PrintedTieBreakMessage)
+                {
+                    WriteLine("~~~~~~~~~~~~~~~~~~~~ ");
+                    WriteLine("TIE BREAK STARTING!");
+                    WriteLine("~~~~~~~~~~~~~~~~~~~~ ");
+                    PrintedTieBreakMessage = true;
+                }
+            }            
+        }
+
+        private void DefineStarterIndexOfPlayers(Player atackingPlayer, out int indexOfAtackingPlayer, out int indexOfDefendingPlayer)
+        {
+            if (atackingPlayer.Equals(Player1))
+            {
+                indexOfAtackingPlayer = 0;
+                indexOfDefendingPlayer = 1;
+            }
+            else
+            {
+                indexOfAtackingPlayer = 1;
+                indexOfDefendingPlayer = 0;
+            }
+        }
+
+        private void SwapIndexesOfPlayers(ref int indexOfAtackingPlayer, ref int indexOfDefendingPlayer)
+        {
+            int tempIndex = indexOfAtackingPlayer;
+            indexOfAtackingPlayer = indexOfDefendingPlayer;
+            indexOfDefendingPlayer = tempIndex;
+        }
+
+        private bool IsSuccessfulDefense(Player defendingPlayer, int starterPlayerServe)
+        {
+            return starterPlayerServe >= defendingPlayer.ReachOfLeftHand
+                && starterPlayerServe <= defendingPlayer.ReachOfRightHand;
+        }
+
+        private int StartGameAndReturnIndexOfAtackinPlayer()
+        {
+            WriteLine("Let's start the Tennis Match!");
+            WriteLine("==============================================================");
+            Player evenOrOddWinnerPlayer = DrawEvenOrOdd();
+            WriteLine($"{evenOrOddWinnerPlayer.Name} will start the game!");
+            WriteLine("Players are now moving to their starting position...");
+            Thread.Sleep(1500);
+            return Players.IndexOf(evenOrOddWinnerPlayer);
+        }
+
+        private Player DrawEvenOrOdd()
+        {
+            WriteLine($"{Player1.Name} is {Player1.EvenOrOdd}");
+            WriteLine($"{Player2.Name} is {Player2.EvenOrOdd}");
+            WriteLine("Drawing Even or Odd...");
+            Thread.Sleep(2000);
+            var evenOrOddWinnerPlayer = _evenOrOdd.Draw(Player1, Player2);
+            return evenOrOddWinnerPlayer;
         }
     }
 }

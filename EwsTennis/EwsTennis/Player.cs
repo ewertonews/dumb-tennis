@@ -1,12 +1,12 @@
 ﻿using EwsTennis.Contracts;
 using EwsTennis.Enums;
-using System;
 
 namespace EwsTennis
 {
-    public class Player
+    public class Player : IPlayer
     {
         private readonly IRandomNumber _randonNumber;
+        private int _position;
 
         public Player(IRandomNumber randonNumber)
         {
@@ -17,9 +17,16 @@ namespace EwsTennis
         public PlayerLevel Level { get; set; } = PlayerLevel.Beginner;
         public int ReachOfLeftHand { get; private set; }
         public int ReachOfRightHand { get; private set; }
-        public int Position { get; set; }
         public EvenOrOddOption EvenOrOdd { get; set; }
         public int Score { get; set; }
+
+        public int Position { 
+            get => _position; 
+            set {
+                _position = value;
+                SetReachOfHands();
+            }
+        }
 
 
         public int Serve()
@@ -29,14 +36,14 @@ namespace EwsTennis
 
         public void SetReachOfHands()
         {
-            var resultLeft = Position - (int)Level;
+            var resultLeft = _position - (int)Level;
             if (resultLeft <= 0)
             {
                 resultLeft = 1;
             }
             ReachOfLeftHand = resultLeft;
 
-            var resultRight = Position + (int)Level;
+            var resultRight = _position + (int)Level;
             if (resultRight > 27)
             {
                 resultRight = 27;
