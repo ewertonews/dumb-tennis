@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace EwsTennis.Tests
 {
-    public class TennisInputDataUnitTests
+    public class PlayersDataReaderUnitTests
     {
-        private TennisInputData _tennisInputFileReader;
+        private PlayersDataReader _tennisInputFileReader;
         private Mock<IFileReader> _fileReaderMock;
         private string[] _fakeFileLines;
 
@@ -18,7 +18,7 @@ namespace EwsTennis.Tests
         public void Setup()
         {
             _fileReaderMock = new Mock<IFileReader>();
-            _tennisInputFileReader = new TennisInputData(_fileReaderMock.Object);
+            _tennisInputFileReader = new PlayersDataReader(_fileReaderMock.Object);
             _fakeFileLines 
                 = new string[] { "Tonho", "Experienced", "Even", "25", "Zé", "Experienced", "Odd", "21" };
         }

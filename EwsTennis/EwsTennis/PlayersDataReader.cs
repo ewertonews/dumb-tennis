@@ -1,9 +1,9 @@
 ﻿namespace EwsTennis
 {
-    public class TennisInputData
+    public class PlayersDataReader
     {
         private readonly IFileReader _fileReader;
-        public TennisInputData(IFileReader fileReader)
+        public PlayersDataReader(IFileReader fileReader)
         {
             _fileReader = fileReader;
         }
