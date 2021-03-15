@@ -152,7 +152,7 @@ namespace EwsTennis
                 if (_referee.IsInTieBreak() && !PrintedTieBreakMessage)
                 {
                     WriteLine("~~~~~~~~~~~~~~~~~~~~ ");
-                    WriteLine("TIE BREAK STARTING!");
+                    WriteLine("TIE BREAK STARTED!");
                     WriteLine("~~~~~~~~~~~~~~~~~~~~ ");
                     PrintedTieBreakMessage = true;
                 }

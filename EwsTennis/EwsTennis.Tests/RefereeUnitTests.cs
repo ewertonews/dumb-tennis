@@ -18,40 +18,33 @@ namespace EwsTennis.Tests
         }
 
         [Test]
-        public void IsInTieBreakShouldReturnTrueWhenPlayersScoreAreBoth40()
+        public void IsInTieBreakShouldReturnTrueWhenPlayerOneTies()
         {
             var player1 = playerBuilder.Build();
-            player1.Score = 3;
+            player1.Score = 2;
             var player2 = playerBuilder.Build();
             player2.Score = 3;
             scoreBoard = new ScoreBoard(player1, player2);
             referee = new Referee(scoreBoard);
 
+            scoreBoard.PlayerScored += referee.OnPlayerScored;
+            scoreBoard.SetPlayerOneScore();
+
             Assert.That(referee.IsInTieBreak(), Is.True);
         }
 
         [Test]
-        public void IsInTieBreakShouldReturnTrueWhenPlayerOneScoredMoreThan3Points()
+        public void IsInTieBreakShouldReturnTrueWhenPlayerTwoTies()
         {
             var player1 = playerBuilder.Build();
             player1.Score = 3;
             var player2 = playerBuilder.Build();
-            player2.Score = 4;
-            var scoreBoard = new ScoreBoard(player1, player2);
+            player2.Score = 2;
+            scoreBoard = new ScoreBoard(player1, player2);
             referee = new Referee(scoreBoard);
 
-            Assert.That(referee.IsInTieBreak(), Is.True);
-        }
-
-        [Test]
-        public void IsInTieBreakShouldReturnTrueWhenPlayerTwoScoredMoreThan3Points()
-        {
-            var player1 = playerBuilder.Build();
-            player1.Score = 4;
-            var player2 = playerBuilder.Build();
-            player2.Score = 3;
-            var scoreBoard = new ScoreBoard(player1, player2);
-            referee = new Referee(scoreBoard);
+            scoreBoard.PlayerScored += referee.OnPlayerScored;
+            scoreBoard.SetPlayerTwoScore();
 
             Assert.That(referee.IsInTieBreak(), Is.True);
         }
@@ -63,7 +56,7 @@ namespace EwsTennis.Tests
             player1.Score = 3;
             var player2 = playerBuilder.Build();
             player2.Score = 2;
-            var scoreBoard = new ScoreBoard(player1, player2);
+            scoreBoard = new ScoreBoard(player1, player2);
             referee = new Referee(scoreBoard);
 
             Assert.That(referee.IsInTieBreak(), Is.Not.True);
@@ -73,10 +66,10 @@ namespace EwsTennis.Tests
         public void OnPlayerScoredShouldChangeScoreListOfScoreBoardAndZeroPlayrsScore()
         {
             var player1 = playerBuilder.Build();
-            player1.Score = 4;
+            player1.Score = 3;
             var player2 = playerBuilder.Build();
-            player2.Score = 3;
-            var scoreBoard = new ScoreBoard(player1, player2);
+            player2.Score = 2;
+            scoreBoard = new ScoreBoard(player1, player2);
             referee = new Referee(scoreBoard);
 
             scoreBoard.PlayerScored += referee.OnPlayerScored;
@@ -93,7 +86,7 @@ namespace EwsTennis.Tests
             player1.Score = 4;
             var player2 = playerBuilder.Build();
             player2.Score = 3;
-            var scoreBoard = new ScoreBoard(player1, player2);
+            scoreBoard = new ScoreBoard(player1, player2);
             referee = new Referee(scoreBoard);
 
             scoreBoard.PlayerScored += referee.OnPlayerScored;
@@ -109,7 +102,7 @@ namespace EwsTennis.Tests
             player1.Score = 3;
             var player2 = playerBuilder.Build();
             player2.Score = 4;
-            var scoreBoard = new ScoreBoard(player1, player2);
+            scoreBoard = new ScoreBoard(player1, player2);
             referee = new Referee(scoreBoard);
 
             scoreBoard.PlayerScored += referee.OnPlayerScored;
@@ -122,10 +115,10 @@ namespace EwsTennis.Tests
         public void OnPlayerScoredShouldChangeTheScoreListWhenStartingTieBreakByPlayer1()
         {
             var player1 = playerBuilder.Build();
-            player1.Score = 3;
+            player1.Score = 2;
             var player2 = playerBuilder.Build();
-            player2.Score = 4;
-            var scoreBoard = new ScoreBoard(player1, player2);
+            player2.Score = 3;
+            scoreBoard = new ScoreBoard(player1, player2);
             referee = new Referee(scoreBoard);
 
             scoreBoard.PlayerScored += referee.OnPlayerScored;
@@ -139,10 +132,10 @@ namespace EwsTennis.Tests
         public void OnPlayerScoredShouldChangeTheScoreListWhenStartingTieBreakByPlayer2()
         {
             var player1 = playerBuilder.Build();
-            player1.Score = 4;
+            player1.Score = 3;
             var player2 = playerBuilder.Build();
-            player2.Score = 3;
-            var scoreBoard = new ScoreBoard(player1, player2);
+            player2.Score = 2;
+            scoreBoard = new ScoreBoard(player1, player2);
             referee = new Referee(scoreBoard);
 
             scoreBoard.PlayerScored += referee.OnPlayerScored;

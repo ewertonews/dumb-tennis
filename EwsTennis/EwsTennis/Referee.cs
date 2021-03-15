@@ -8,6 +8,7 @@ namespace EwsTennis
     public class Referee : IReferee
     {
         private readonly IScoreBoard _scoreBoard;
+        private bool tieBreakSet = false;
         public bool GameEnded { get; private set; } = false;
 
         public Referee(IScoreBoard scoreBoard)
@@ -22,18 +23,19 @@ namespace EwsTennis
 
         public bool IsInTieBreak()
         {
-            var player1Score = _scoreBoard.GetPlayerOneScore();
-            var player2Score = _scoreBoard.GetPlayerTwoScore();
-            List<int> scoreList = _scoreBoard.ScoreList;
-            return (player1Score == 40 && IsTie())
-                || (!scoreList.Contains(_scoreBoard.GetPlayerOneScore()) || (!scoreList.Contains(player2Score)));
+            return tieBreakSet;
         }
 
         public void OnPlayerScored(object source, EventArgs eventArgs)
         {
+            var player1Score = _scoreBoard.GetPlayerOneScore();
+            if (!tieBreakSet)
+            {
+                tieBreakSet = player1Score == 40 && IsTie();
+            }
             bool doesNotContainPlayerScore = !_scoreBoard.ScoreList.Contains(_scoreBoard.Player1.Score);
                 
-            if (IsTie() && doesNotContainPlayerScore)
+            if (IsInTieBreak() && doesNotContainPlayerScore)
             {
                 _scoreBoard.ScoreList = Enumerable.Range(0, 100).ToList();
                 _scoreBoard.Player1.Score = 0;
