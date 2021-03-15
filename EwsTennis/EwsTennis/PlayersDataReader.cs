@@ -1,6 +1,8 @@
-﻿namespace EwsTennis
+﻿using EwsTennis.Contracts;
+
+namespace EwsTennis
 {
-    public class PlayersDataReader
+    public class PlayersDataReader : IPlayersDataReader
     {
         private readonly IFileReader _fileReader;
         public PlayersDataReader(IFileReader fileReader)

@@ -17,4 +17,16 @@
     <ProjectReference Include="..\EwsTennis\EwsTennis.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="TestFiles\PlayersTestFileEmpty.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestFiles\PlayersTestFileIncomplete.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestFiles\PlayersTestFileOk.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

@@ -1,10 +1,6 @@
-﻿using Moq;
+﻿using EwsTennis.Contracts;
+using Moq;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EwsTennis.Tests
 {
@@ -19,13 +15,13 @@ namespace EwsTennis.Tests
         {
             _fileReaderMock = new Mock<IFileReader>();
             _tennisInputFileReader = new PlayersDataReader(_fileReaderMock.Object);
-            _fakeFileLines 
+            _fakeFileLines
                 = new string[] { "Tonho", "Experienced", "Even", "25", "Zé", "Experienced", "Odd", "21" };
         }
 
         [Test]
         public void GetPlayerOneDataShouldReturnArrayOfStringWithLenghEquals4()
-        {               
+        {
             _fileReaderMock.Setup(fr => fr.GetFileLines()).Returns(_fakeFileLines);
             var expectedPlayerData = new string[] { "Tonho", "Experienced", "Even", "25" };
 

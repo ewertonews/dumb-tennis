@@ -1,4 +1,4 @@
-﻿namespace EwsTennis
+﻿namespace EwsTennis.Contracts
 {
     public interface IFileReader
     {
