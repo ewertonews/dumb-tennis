@@ -1,5 +1,6 @@
 ﻿using EwsTennis.Contracts;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace EwsTennis
 {
@@ -7,10 +8,18 @@ namespace EwsTennis
     {
         static void Main(string[] args)
         {
-            var services = SetupServices();
-            var gameController = services.GetService<IGameController>();
-            gameController.InitializePlayers(args);
-            gameController.Play();
+            try
+            {
+                var services = SetupServices();
+                var gameController = services.GetService<IGameController>();
+                gameController.InitializePlayers(args);
+                gameController.Play();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
         }
 
         static ServiceProvider SetupServices()
