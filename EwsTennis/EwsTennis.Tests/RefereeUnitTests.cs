@@ -146,7 +146,24 @@ namespace EwsTennis.Tests
         }
 
         [Test]
-        public void IsAdvantageShoulfReturnTrueWhenUntieingDuringTieBreak()
+        public void IsAdvantageShoulfReturnTrueWhenPlayer1UntiesDuringTieBreak()
+        {
+            var player1 = playerBuilder.Build();
+            player1.Score = 2;
+            var player2 = playerBuilder.Build();
+            player2.Score = 3;
+            scoreBoard = new ScoreBoard(player1, player2);
+            referee = new Referee(scoreBoard);
+
+            scoreBoard.PlayerScored += referee.OnPlayerScored;
+            scoreBoard.SetPlayerOneScore();
+            scoreBoard.SetPlayerOneScore();
+
+            Assert.That(referee.IsAdvantage(), Is.True);
+        }
+
+        [Test]
+        public void IsAdvantageShoulfReturnTrueWhenPlayer2UntiesDuringTieBreak()
         {
             var player1 = playerBuilder.Build();
             player1.Score = 3;
@@ -179,6 +196,25 @@ namespace EwsTennis.Tests
             scoreBoard.SetPlayerOneScore();
 
             Assert.That(referee.IsAdvantage(), Is.False);
+        }
+
+        [Test]
+        public void IsDeuceShouldReturnTrueWhenPlayer1TiesDuringTieBreak()
+        {
+            var player1 = playerBuilder.Build();
+            player1.Score = 3;
+            var player2 = playerBuilder.Build();
+            player2.Score = 2;
+            scoreBoard = new ScoreBoard(player1, player2);
+            referee = new Referee(scoreBoard);
+
+            scoreBoard.PlayerScored += referee.OnPlayerScored;
+            scoreBoard.SetPlayerTwoScore();
+            scoreBoard.SetPlayerOneScore();
+            scoreBoard.SetPlayerTwoScore();
+
+            Assert.That(referee.IsDeuce(), Is.True);
+
         }
 
     }

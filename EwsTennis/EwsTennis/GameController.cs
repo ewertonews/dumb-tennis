@@ -1,9 +1,8 @@
 ﻿using EwsTennis.Contracts;
 using System;
-using static System.Console;
 using System.Collections.Generic;
 using System.Threading;
-using System.Linq;
+using static System.Console;
 
 namespace EwsTennis
 {
@@ -28,7 +27,7 @@ namespace EwsTennis
             IPlayersDataReader playersDataReader,
             IEvenOrOdd evenOrOdd,
             IScoreBoard scoreBoard,
-            IReferee referee, 
+            IReferee referee,
             IGameInput gameInput)
         {
             _playerBuilder = playerBuilder;
@@ -80,33 +79,24 @@ namespace EwsTennis
             Player atackingPlayer;
             if (FirstServe)
             {
-                indexOfAtackingPlayer = StartGameAndReturnIndexOfAtackinPlayer();
-                atackingPlayer = Players[indexOfAtackingPlayer];
-
-                DefineStarterIndexOfPlayers(
-                    atackingPlayer,
+                ConfigureFirstRound(
                     out indexOfAtackingPlayer,
-                    out indexOfDefendingPlayer);
-
-                playerAction = "served";
-                FirstServe = false;
+                    out indexOfDefendingPlayer,
+                    out playerAction);
             }
 
             while (!_referee.GameEnded)
             {
-                atackingPlayer = Players[indexOfAtackingPlayer];
-                Player defendingPlayer = Players[indexOfDefendingPlayer];
+                Player defendingPlayer;
+                int atackingPlayerServe;
 
-                var atackingPlayerServe = atackingPlayer.Serve();
-                WriteLine($"{atackingPlayer.Name} sent ball to position {atackingPlayerServe}");
-                if(playerAction == "served")
-                {
-                    WriteLine($"{Players[indexOfAtackingPlayer].Name} {playerAction}!");
-                }
-
-                WriteLine($"Type the position {defendingPlayer.Name} should run to (1 to 27):");
-                var positionOfDefenfingPlayer = _gameInput.ReadPosition();
-                defendingPlayer.Position = positionOfDefenfingPlayer;
+                SetAtackAndDefense(
+                    indexOfAtackingPlayer,
+                    indexOfDefendingPlayer,
+                    playerAction,
+                    out atackingPlayer,
+                    out defendingPlayer,
+                    out atackingPlayerServe);
 
                 if (IsSuccessfulDefense(defendingPlayer, atackingPlayerServe))
                 {
@@ -121,7 +111,37 @@ namespace EwsTennis
                     PrintScore(atackingPlayer);
                     playerAction = "served";
                 }
-            }            
+            }
+        }
+
+        private void SetAtackAndDefense(int indexOfAtackingPlayer, int indexOfDefendingPlayer, string playerAction, out Player atackingPlayer, out Player defendingPlayer, out int atackingPlayerServe)
+        {
+            atackingPlayer = Players[indexOfAtackingPlayer];
+            defendingPlayer = Players[indexOfDefendingPlayer];
+            atackingPlayerServe = atackingPlayer.Serve();
+            WriteLine($"{atackingPlayer.Name} sent ball to position {atackingPlayerServe}");
+            if (playerAction == "served")
+            {
+                WriteLine($"{Players[indexOfAtackingPlayer].Name} {playerAction}!");
+            }
+
+            WriteLine($"Type the position {defendingPlayer.Name} should run to (1 to 27):");
+            var positionOfDefenfingPlayer = _gameInput.ReadPosition();
+            defendingPlayer.Position = positionOfDefenfingPlayer;
+        }
+
+        private void ConfigureFirstRound(out int indexOfAtackingPlayer, out int indexOfDefendingPlayer, out string playerAction)
+        {
+            indexOfAtackingPlayer = StartGameAndReturnIndexOfAtackinPlayer();
+            var atackingPlayer = Players[indexOfAtackingPlayer];
+
+            DefineStarterIndexOfPlayers(
+                atackingPlayer,
+                out indexOfAtackingPlayer,
+                out indexOfDefendingPlayer);
+
+            playerAction = "served";
+            FirstServe = false;
         }
 
         private void SetPlayerScore(Player atackingPlayer)
@@ -156,7 +176,11 @@ namespace EwsTennis
                     WriteLine("~~~~~~~~~~~~~~~~~~~~ ");
                     PrintedTieBreakMessage = true;
                 }
-            }            
+                if (_referee.IsAdvantage())
+                {
+                    WriteLine($"{atackingPlayer.Name} IN ADVANTAGE!");
+                }
+            }
         }
 
         private void DefineStarterIndexOfPlayers(Player atackingPlayer, out int indexOfAtackingPlayer, out int indexOfDefendingPlayer)
