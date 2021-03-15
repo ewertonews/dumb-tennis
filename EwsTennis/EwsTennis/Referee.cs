@@ -79,6 +79,10 @@ namespace EwsTennis
             {
                 playerInAdvantage = true;
             }
+            else
+            {
+                playerInAdvantage = false;
+            }
         }        
 
 
