@@ -144,5 +144,22 @@ namespace EwsTennis.Tests
             Assert.That(scoreBoard.ScoreList[1], Is.EqualTo(1));
             Assert.That(scoreBoard.ScoreList.Count, Is.EqualTo(100));
         }
+
+        [Test]
+        public void IsAdvantageShoulfReturnTrueWhenTieingDuringTieBreak()
+        {
+            var player1 = playerBuilder.Build();
+            player1.Score = 3;
+            var player2 = playerBuilder.Build();
+            player2.Score = 2;
+            scoreBoard = new ScoreBoard(player1, player2);
+            referee = new Referee(scoreBoard);
+
+            scoreBoard.PlayerScored += referee.OnPlayerScored;
+            scoreBoard.SetPlayerTwoScore();
+            scoreBoard.SetPlayerTwoScore();
+
+            Assert.That(referee.IsAdvantage(), Is.True);
+        }
     }
 }

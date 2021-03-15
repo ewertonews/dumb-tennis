@@ -8,7 +8,10 @@ namespace EwsTennis
     public class Referee : IReferee
     {
         private readonly IScoreBoard _scoreBoard;
-        private bool tieBreakSet = false;
+        private bool tieBreakSet;
+        private bool playerInAdvantage;
+        private bool isDeuce;
+
         public bool GameEnded { get; private set; } = false;
 
         public Referee(IScoreBoard scoreBoard)
