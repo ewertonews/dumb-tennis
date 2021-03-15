@@ -155,7 +155,8 @@ namespace EwsTennis
 
         private void PrintScore(Player atackingPlayer)
         {
-            WriteLine($"{atackingPlayer.Name} scored!");
+            WriteLine("~~~~~~~~~~~~~~~~~~~~");
+            WriteLine($"{atackingPlayer.Name.ToUpper()} SCORED!");
             WriteLine(@"\o/\o/\o/\o/\o/\o/");
             if (_referee.GameEnded)
             {

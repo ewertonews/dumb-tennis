@@ -58,8 +58,10 @@ namespace EwsTennis
             var scorePlayer1 = _scoreBoard.Player1.Score;
             var scorePlayer2 = _scoreBoard.Player2.Score;
 
-            if (scorePlayer1 >= 3 && scorePlayer1 - scorePlayer2 >= 2 
-                || scorePlayer2 >= 3 && scorePlayer2 - scorePlayer1 >= 2)
+            if (scorePlayer1 > 3 && scorePlayer1 - scorePlayer2 >= 2 
+                || (scorePlayer2 > 3 && scorePlayer2 - scorePlayer1 >= 2)
+                || (tieBreakSet && scorePlayer1 - scorePlayer2 >= 2)
+                || (tieBreakSet && scorePlayer2 - scorePlayer1 >= 2))
             {
                 GameEnded = true;
             }            
