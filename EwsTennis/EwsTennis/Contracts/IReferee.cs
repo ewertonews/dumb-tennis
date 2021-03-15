@@ -7,5 +7,6 @@ namespace EwsTennis.Contracts
         bool IsInTieBreak();
         bool GameEnded { get; }
         void OnPlayerScored(object source, EventArgs eventArgs);
+        bool IsAdvantage();
     }
 }

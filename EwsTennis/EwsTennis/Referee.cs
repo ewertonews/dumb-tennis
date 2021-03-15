@@ -31,14 +31,11 @@ namespace EwsTennis
 
         public void OnPlayerScored(object source, EventArgs eventArgs)
         {
-            var player1Score = _scoreBoard.GetPlayerOneScore();
-            if (!tieBreakSet)
-            {
-                tieBreakSet = player1Score == 40 && IsTie();
-            }
+            SetTieBreak();
+            SetAdvantage();
             bool doesNotContainPlayerScore = !_scoreBoard.ScoreList.Contains(_scoreBoard.Player1.Score);
-                
-            if (IsInTieBreak() && doesNotContainPlayerScore)
+
+            if (tieBreakSet && doesNotContainPlayerScore)
             {
                 _scoreBoard.ScoreList = Enumerable.Range(0, 100).ToList();
                 _scoreBoard.Player1.Score = 0;
@@ -46,6 +43,14 @@ namespace EwsTennis
             }
 
             CheckWinner();
+        }
+
+        private void SetTieBreak()
+        {
+            if (!tieBreakSet)
+            {
+                tieBreakSet = _scoreBoard.Player1.Score == 3 && IsTie();
+            }
         }
 
         private void CheckWinner()
@@ -59,5 +64,23 @@ namespace EwsTennis
                 GameEnded = true;
             }            
         }
+
+        public bool IsAdvantage()
+        {
+            return playerInAdvantage;
+        }
+
+        private void SetAdvantage()
+        {
+            int player1ScoreDifference = _scoreBoard.Player1.Score - _scoreBoard.Player2.Score;
+            int player2ScoreDifference = _scoreBoard.Player2.Score - _scoreBoard.Player1.Score;
+
+            if (tieBreakSet && (player1ScoreDifference == 1 || player2ScoreDifference == 1))
+            {
+                playerInAdvantage = true;
+            }
+        }        
+
+
     }
 }

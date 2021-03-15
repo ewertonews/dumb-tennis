@@ -146,7 +146,7 @@ namespace EwsTennis.Tests
         }
 
         [Test]
-        public void IsAdvantageShoulfReturnTrueWhenTieingDuringTieBreak()
+        public void IsAdvantageShoulfReturnTrueWhenUntieingDuringTieBreak()
         {
             var player1 = playerBuilder.Build();
             player1.Score = 3;
@@ -158,8 +158,10 @@ namespace EwsTennis.Tests
             scoreBoard.PlayerScored += referee.OnPlayerScored;
             scoreBoard.SetPlayerTwoScore();
             scoreBoard.SetPlayerTwoScore();
+            
 
             Assert.That(referee.IsAdvantage(), Is.True);
-        }
+        }      
+
     }
 }
