@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EwsTennis
+﻿namespace EwsTennis
 {
     public class TennisInputData
     {
@@ -18,6 +12,12 @@ namespace EwsTennis
         {
             var fileContent = _fileReader.GetFileLines();
             return fileContent[0..4];
+        }
+
+        public string[] GetPlayerTwoData()
+        {
+            var fileContent = _fileReader.GetFileLines();
+            return fileContent[4..8];
         }
     }
 }
