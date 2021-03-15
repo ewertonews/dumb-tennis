@@ -35,5 +35,18 @@ namespace EwsTennis.Tests
             Assert.That(gameControler.Players[0].EvenOrOdd, Is.Not.Zero);
             Assert.That(gameControler.Players[1].EvenOrOdd, Is.Not.Zero);
         }
+
+        [Test]
+        public void InitializePlayersShouldThrowArgumentExceptionForNullArrayOfArgs()
+        {
+            IRandomNumber randomNumber = new RandomNumber();
+            IPlayerBuilder playerBuilder = new PlayerBuilder(randomNumber);
+            var gameControler = new GameController(
+                    playerBuilder,
+                    playerDataReaderMock.Object);
+
+            Assert.That(() => gameControler.InitializePlayers(null), Throws.ArgumentException);
+
+        }
     }
 }
