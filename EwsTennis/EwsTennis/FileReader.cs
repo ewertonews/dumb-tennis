@@ -1,4 +1,5 @@
 ﻿using EwsTennis.Contracts;
+using EwsTennis.Exceptions;
 using System.IO;
 
 namespace EwsTennis
@@ -14,7 +15,13 @@ namespace EwsTennis
 
         public string[] GetFileLines()
         {
-            return File.ReadAllLines(_filePath);
+            var fileLines = File.ReadAllLines(_filePath);
+            if(fileLines.Length < 8)
+            {
+                throw new InvalidFileException("O arquivo fornecido com os dados dos jogadores é inválido.");
+            }
+
+            return fileLines;
         }
     }
 }

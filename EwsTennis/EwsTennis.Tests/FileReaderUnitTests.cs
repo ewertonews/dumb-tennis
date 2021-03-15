@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using EwsTennis.Exceptions;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +22,11 @@ namespace EwsTennis.Tests
         }
 
         [Test]
-        public void GetFileLinesShouldThrowInvalidFileExceptionForIncompleteFile()
+        [TestCase("TestFiles/PlayersTestFileIncomplete.txt")]
+        [TestCase("TestFiles/PlayersTestFileEmpty.txt")]
+        public void GetFileLinesShouldThrowInvalidFileExceptionForInvalidFileInput(string filePath)
         {
-            var fileReader = new FileReader("TestFiles/PlayersTestFileIncomplete.txt");
+            var fileReader = new FileReader(filePath);
 
             Assert.That(() => fileReader.GetFileLines(), Throws.TypeOf<InvalidFileException>());
         }
