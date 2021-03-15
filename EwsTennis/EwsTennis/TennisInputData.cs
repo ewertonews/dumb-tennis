@@ -16,7 +16,8 @@ namespace EwsTennis
 
         public string[] GetPlayerOneData()
         {
-            throw new NotImplementedException();
+            var fileContent = _fileReader.GetFileLines();
+            return fileContent[0..4];
         }
     }
 }

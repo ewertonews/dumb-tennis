@@ -24,12 +24,13 @@ namespace EwsTennis.Tests
         {
             var fakeFileLines 
                 = new string[] { "Tonho", "Experienced", "Even", "25", "Zé", "Experienced", "Odd", "21" };
-            _fileReaderMock.Setup(fr => fr.GetFileLines("fakepath")).Returns(fakeFileLines);
+            _fileReaderMock.Setup(fr => fr.GetFileLines()).Returns(fakeFileLines);
             var expectedPlayerData = new string[] { "Tonho", "Experienced", "Even", "25" };
 
             string[] playerOneData = _tennisInputFileReader.GetPlayerOneData();
 
             Assert.That(playerOneData.Length, Is.EqualTo(4));
+            Assert.That(playerOneData, Is.EquivalentTo(playerOneData));
         }
     }
 }

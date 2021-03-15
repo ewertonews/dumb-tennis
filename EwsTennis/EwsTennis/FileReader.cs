@@ -4,9 +4,16 @@ namespace EwsTennis
 {
     public class FileReader : IFileReader
     {
-        public string[] GetFileLines(string filePath)
+        private readonly string _filePath;
+
+        public FileReader(string filePath)
         {
-            return File.ReadAllLines(filePath);
+            _filePath = filePath;
+        }
+
+        public string[] GetFileLines()
+        {
+            return File.ReadAllLines(_filePath);
         }
     }
 }
