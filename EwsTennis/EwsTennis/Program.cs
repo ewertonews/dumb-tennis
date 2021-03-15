@@ -10,7 +10,7 @@ namespace EwsTennis
             var services = SetupServices();
             var gameController = services.GetService<IGameController>();
             gameController.InitializePlayers(args);
-            gameController.Round();
+            gameController.Play();
         }
 
         static ServiceProvider SetupServices()
@@ -25,6 +25,7 @@ namespace EwsTennis
                 .AddSingleton<IReferee, Referee>()
                 .AddSingleton<IScoreBoard, ScoreBoard>()
                 .AddSingleton<IGameController, GameController>()
+                .AddSingleton<IGameInput, GameInput>()
                 .BuildServiceProvider();
 
             return serviceProvider;

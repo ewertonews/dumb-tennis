@@ -14,9 +14,11 @@ namespace EwsTennis
         private readonly IEvenOrOdd _evenOrOdd;
         private readonly IScoreBoard _scoreBoard;
         private readonly IReferee _referee;
+        private readonly IGameInput _gameInput;
 
-        public bool FirstServe { get; set; } = true;
-        public bool PrintedTieBreakMessage { get; set; } = false;
+        private bool FirstServe = true;
+        private bool PrintedTieBreakMessage { get; set; } = false;
+
         public List<Player> Players { get; } = new List<Player>();
         public Player Player1 => Players[0];
         public Player Player2 => Players[1];
@@ -25,8 +27,9 @@ namespace EwsTennis
             IPlayerBuilder playerBuilder,
             IPlayersDataReader playersDataReader,
             IEvenOrOdd evenOrOdd,
-            IScoreBoard scoreBoard, 
-            IReferee referee)
+            IScoreBoard scoreBoard,
+            IReferee referee, 
+            IGameInput gameInput)
         {
             _playerBuilder = playerBuilder;
             _playersDataReader = playersDataReader;
@@ -34,6 +37,7 @@ namespace EwsTennis
             _scoreBoard = scoreBoard;
             _referee = referee;
             scoreBoard.PlayerScored += referee.OnPlayerScored;
+            _gameInput = gameInput;
         }
 
         public void InitializePlayers(string[] programArgs)
@@ -68,7 +72,7 @@ namespace EwsTennis
             Players.Add(player2);
         }
 
-        public void Round()
+        public void Play()
         {
             int indexOfAtackingPlayer = -1;
             int indexOfDefendingPlayer = -1;
@@ -94,13 +98,14 @@ namespace EwsTennis
                 Player defendingPlayer = Players[indexOfDefendingPlayer];
 
                 var atackingPlayerServe = atackingPlayer.Serve();
+                WriteLine($"{atackingPlayer.Name} sent ball to position {atackingPlayerServe}");
                 if(playerAction == "served")
                 {
                     WriteLine($"{Players[indexOfAtackingPlayer].Name} {playerAction}!");
                 }
 
                 WriteLine($"Type the position {defendingPlayer.Name} should run to (1 to 27):");
-                var positionOfDefenfingPlayer = Convert.ToInt32(ReadLine());
+                var positionOfDefenfingPlayer = _gameInput.ReadPosition();
                 defendingPlayer.Position = positionOfDefenfingPlayer;
 
                 if (IsSuccessfulDefense(defendingPlayer, atackingPlayerServe))

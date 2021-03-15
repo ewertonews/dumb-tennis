@@ -117,5 +117,39 @@ namespace EwsTennis.Tests
 
             Assert.That(referee.GameEnded);
         }
+
+        [Test]
+        public void OnPlayerScoredShouldChangeTheScoreListWhenStartingTieBreakByPlayer1()
+        {
+            var player1 = playerBuilder.Build();
+            player1.Score = 3;
+            var player2 = playerBuilder.Build();
+            player2.Score = 4;
+            var scoreBoard = new ScoreBoard(player1, player2);
+            referee = new Referee(scoreBoard);
+
+            scoreBoard.PlayerScored += referee.OnPlayerScored;
+            scoreBoard.SetPlayerOneScore();
+
+            Assert.That(scoreBoard.ScoreList[1], Is.EqualTo(1));
+            Assert.That(scoreBoard.ScoreList.Count, Is.EqualTo(100));
+        }
+
+        [Test]
+        public void OnPlayerScoredShouldChangeTheScoreListWhenStartingTieBreakByPlayer2()
+        {
+            var player1 = playerBuilder.Build();
+            player1.Score = 4;
+            var player2 = playerBuilder.Build();
+            player2.Score = 3;
+            var scoreBoard = new ScoreBoard(player1, player2);
+            referee = new Referee(scoreBoard);
+
+            scoreBoard.PlayerScored += referee.OnPlayerScored;
+            scoreBoard.SetPlayerTwoScore();
+
+            Assert.That(scoreBoard.ScoreList[1], Is.EqualTo(1));
+            Assert.That(scoreBoard.ScoreList.Count, Is.EqualTo(100));
+        }
     }
 }

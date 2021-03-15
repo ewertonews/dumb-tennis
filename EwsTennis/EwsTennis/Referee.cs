@@ -9,7 +9,6 @@ namespace EwsTennis
     {
         private readonly IScoreBoard _scoreBoard;
         public bool GameEnded { get; private set; } = false;
-        public Player Winner { get; private set; }
 
         public Referee(IScoreBoard scoreBoard)
         {
@@ -32,9 +31,11 @@ namespace EwsTennis
 
         public void OnPlayerScored(object source, EventArgs eventArgs)
         {
-            if (IsTie() && _scoreBoard.Player1.Score > 3)
+            bool doesNotContainPlayerScore = !_scoreBoard.ScoreList.Contains(_scoreBoard.Player1.Score);
+                
+            if (IsTie() && doesNotContainPlayerScore)
             {
-                _scoreBoard.ScoreList = Enumerable.Range(1, 100).ToList();
+                _scoreBoard.ScoreList = Enumerable.Range(0, 100).ToList();
                 _scoreBoard.Player1.Score = 0;
                 _scoreBoard.Player2.Score = 0;
             }
