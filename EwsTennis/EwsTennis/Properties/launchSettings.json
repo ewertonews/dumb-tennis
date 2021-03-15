@@ -2,7 +2,7 @@
   "profiles": {
     "EwsTennis": {
       "commandName": "Project",
-      "commandLineArgs": "C:\\Users\\320087056\\OneDrive\\BetterProfessional\\Pottencial\\tech-test-tennis\\EwsTennis\\EwsTennis\\SampleFile.txt"
+      "commandLineArgs": "./Files/SampleFile.txt"
     }
   }
 }

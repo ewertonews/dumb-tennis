@@ -25,7 +25,6 @@ namespace EwsTennis
                 .AddSingleton<IReferee, Referee>()
                 .AddSingleton<IScoreBoard, ScoreBoard>()
                 .AddSingleton<IGameController, GameController>()
-                .AddSingleton<IGameInput, GameInput>()
                 .BuildServiceProvider();
 
             return serviceProvider;

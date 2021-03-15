@@ -9,7 +9,6 @@ namespace EwsTennis.Tests
         private Mock<IPlayersDataReader> playerDataReaderMock = new Mock<IPlayersDataReader>();
         private Mock<IEvenOrOdd> evenOrOddMock = new Mock<IEvenOrOdd>();
         private Mock<IReferee> refereeMock = new Mock<IReferee>();
-        private Mock<IGameInput> gameInputMock = new Mock<IGameInput>();
         private IScoreBoard _scoreBoard;
         private IGameController _gameController;
 
@@ -24,8 +23,7 @@ namespace EwsTennis.Tests
                     playerDataReaderMock.Object,
                     evenOrOddMock.Object,
                     _scoreBoard,
-                    refereeMock.Object,
-                    gameInputMock.Object);
+                    refereeMock.Object);
 
             var player1DataMock = new string[] { "Tonho", "Experienced", "Even", "25" };
             var player2DataMock = new string[] { "Zé", "Experienced", "Odd", "21" };

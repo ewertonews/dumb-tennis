@@ -13,7 +13,6 @@ namespace EwsTennis
         private readonly IEvenOrOdd _evenOrOdd;
         private readonly IScoreBoard _scoreBoard;
         private readonly IReferee _referee;
-        private readonly IGameInput _gameInput;
 
         private bool FirstServe = true;
         private bool PrintedTieBreakMessage { get; set; } = false;
@@ -27,8 +26,7 @@ namespace EwsTennis
             IPlayersDataReader playersDataReader,
             IEvenOrOdd evenOrOdd,
             IScoreBoard scoreBoard,
-            IReferee referee,
-            IGameInput gameInput)
+            IReferee referee)
         {
             _playerBuilder = playerBuilder;
             _playersDataReader = playersDataReader;
@@ -36,7 +34,6 @@ namespace EwsTennis
             _scoreBoard = scoreBoard;
             _referee = referee;
             scoreBoard.PlayerScored += referee.OnPlayerScored;
-            _gameInput = gameInput;
         }
 
         public void InitializePlayers(string[] programArgs)
@@ -126,7 +123,7 @@ namespace EwsTennis
             }
 
             WriteLine($"Type the position {defendingPlayer.Name} should run to (1 to 27):");
-            var positionOfDefenfingPlayer = _gameInput.ReadPosition();
+            var positionOfDefenfingPlayer = Convert.ToInt32(ReadLine());
             defendingPlayer.Position = positionOfDefenfingPlayer;
         }
 
