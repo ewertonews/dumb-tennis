@@ -10,15 +10,15 @@ namespace EwsTennis
             _fileReader = fileReader;
         }
 
-        public string[] GetPlayerOneData()
+        public string[] GetPlayerOneData(string filePath)
         {
-            var fileContent = _fileReader.GetFileLines();
+            var fileContent = _fileReader.GetFileLines(filePath);
             return fileContent[0..4];
         }
 
-        public string[] GetPlayerTwoData()
+        public string[] GetPlayerTwoData(string filePath)
         {
-            var fileContent = _fileReader.GetFileLines();
+            var fileContent = _fileReader.GetFileLines(filePath);
             return fileContent[4..8];
         }
     }

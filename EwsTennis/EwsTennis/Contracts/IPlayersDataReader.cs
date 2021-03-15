@@ -2,7 +2,7 @@
 {
     public interface IPlayersDataReader
     {
-        string[] GetPlayerOneData();
-        string[] GetPlayerTwoData();
+        string[] GetPlayerOneData(string filePath);
+        string[] GetPlayerTwoData(string filePath);
     }
 }
