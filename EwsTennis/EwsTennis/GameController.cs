@@ -21,6 +21,11 @@ namespace EwsTennis
 
         public void InitializePlayers(string[] programArgs)
         {
+            if (programArgs.Length == 0)
+            {
+                throw new ArgumentException("Argument with file path cannot be null or empty");
+            }
+
             var filePath = programArgs[0];
             var player1Data = _playersDataReader.GetPlayerOneData(filePath);
             var player2Data = _playersDataReader.GetPlayerTwoData(filePath);

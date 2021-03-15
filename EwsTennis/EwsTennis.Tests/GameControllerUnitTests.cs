@@ -37,15 +37,16 @@ namespace EwsTennis.Tests
         }
 
         [Test]
-        public void InitializePlayersShouldThrowArgumentExceptionForNullArrayOfArgs()
+        public void InitializePlayersShouldThrowArgumentExceptionForEmptyArrayOfArgs()
         {
             IRandomNumber randomNumber = new RandomNumber();
             IPlayerBuilder playerBuilder = new PlayerBuilder(randomNumber);
             var gameControler = new GameController(
                     playerBuilder,
                     playerDataReaderMock.Object);
+            string[] args = new string[]{};
 
-            Assert.That(() => gameControler.InitializePlayers(null), Throws.ArgumentException);
+            Assert.That(() => gameControler.InitializePlayers(args), Throws.ArgumentException);
 
         }
     }

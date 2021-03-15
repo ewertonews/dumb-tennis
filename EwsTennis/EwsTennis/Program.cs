@@ -6,7 +6,7 @@ namespace EwsTennis
     {
         static void Main(string[] args)
         {
-            IServiceCollection serviceCollection = new ServiceCollection();
+            //IServiceCollection serviceCollection = new ServiceCollection();
 
         }
     }
