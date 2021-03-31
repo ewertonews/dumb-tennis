@@ -116,7 +116,7 @@ namespace EwsTennis
             atackingPlayer = Players[indexOfAtackingPlayer];
             defendingPlayer = Players[indexOfDefendingPlayer];
             atackingPlayerServe = atackingPlayer.Serve();
-            WriteLine($"{atackingPlayer.Name} sent ball to position {atackingPlayerServe}");
+            //WriteLine($"{atackingPlayer.Name} sent ball to position {atackingPlayerServe}");
             if (playerAction == "served")
             {
                 WriteLine($"{Players[indexOfAtackingPlayer].Name} {playerAction}!");
